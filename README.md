@@ -4,18 +4,28 @@
 
 ## Chạy ứng dụng
 
-Ứng dụng tải dữ liệu bằng `fetch`, vì vậy cần chạy qua HTTP thay vì mở trực tiếp `index.html` bằng `file://`:
+Ứng dụng tải dữ liệu bằng `fetch`, vì vậy cần chạy qua HTTP thay vì mở trực tiếp `index.html` bằng `file://`.
 
-```bash
-python -m http.server 3000
+Trên Windows, chạy file sau trong thư mục dự án:
+
+```powershell
+.\run_app.bat
 ```
 
-Sau đó mở `http://localhost:3000`.
+Sau đó mở đúng địa chỉ:
+
+**http://localhost:5500/index.html**
+
+Hoặc khởi động máy chủ trực tiếp bằng PowerShell:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\server.ps1
+```
 
 ## Tình trạng dữ liệu
 
-- `data/data_A1.json` đến `data/data_C1.json` chứa tổng cộng 35.000 mục.
-- Mỗi level có 5.000 từ, 1.000 cụm từ và 1.000 câu giao tiếp.
+- `data/data_A1.json` đến `data/data_C1.json` chứa tổng cộng 35.080 mục.
+- Mỗi level có 5.000 từ và ít nhất 1.000 cụm từ, 1.000 câu giao tiếp; A1/A2 có thêm các gói giao tiếp đời sống và công việc.
 - Các nhãn A1–C1 hiện là năm **nhóm tần suất**, không phải phân loại CEFR đã được chuyên gia hoặc nguồn CEFR xác nhận.
 - 10.000 mục giao tiếp tập trung vào sinh hoạt, mua sắm, đi lại, dịch vụ, văn phòng, khách hàng và quản lý.
 - Nghĩa Việt và IPA được nhập từ từ điển cộng đồng cũ. Một phần dữ liệu có placeholder hoặc chú thích từ điển cần biên tập lại.
