@@ -1,0 +1,9 @@
+# Personal learning progress and local test artifacts
+dictalearn_progress.json
+edge-test-*.png
+
+# Local secrets and generated caches
+.env
+.env.*
+__pycache__/
+*.pyc

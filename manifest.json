@@ -1,0 +1,14 @@
+{
+  "name": "DictaLearn - Luyện nghe chép chính tả tiếng Anh",
+  "short_name": "DictaLearn",
+  "description": "Ứng dụng luyện nghe, chép chính tả và học từ vựng tiếng Anh với phương pháp lặp lại ngắt quãng",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0d14",
+  "theme_color": "#6366f1",
+  "orientation": "any",
+  "icons": [
+    { "src": "./assets/icon-192.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "./assets/icon-512.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "A1": {
+    "phrases": [
+      { "english": "good morning", "vi": "chào buổi sáng", "ipa": "/ɡʊd ˈmɔːnɪŋ/", "category": "Chào hỏi & Đời sống" },
+      { "english": "good afternoon", "vi": "chào buổi chiều", "ipa": "/ɡʊd ˌɑːftəˈnuːn/", "category": "Chào hỏi & Đời sống" },
+      { "english": "good evening", "vi": "chào buổi tối", "ipa": "/ɡʊd ˈiːvnɪŋ/", "category": "Chào hỏi & Đời sống" },
+      { "english": "good night", "vi": "chúc ngủ ngon", "ipa": "/ɡʊd naɪt/", "category": "Chào hỏi & Đời sống" },
+      { "english": "thank you very much", "vi": "cảm ơn bạn rất nhiều", "ipa": "/θæŋk juː ˈveri mʌtʃ/", "category": "Chào hỏi & Đời sống" },
+      { "english": "you are welcome", "vi": "không có chi", "ipa": "/juː ɑːr ˈwelkəm/", "category": "Chào hỏi & Đời sống" },
+      { "english": "nice to meet you", "vi": "rất vui được gặp bạn", "ipa": "/naɪs tuː miːt juː/", "category": "Chào hỏi & Đời sống" },
+      { "english": "how are you", "vi": "bạn khỏe không", "ipa": "/haʊ ɑːr juː/", "category": "Chào hỏi & Đời sống" },
+      { "english": "see you later", "vi": "hẹn gặp lại sau", "ipa": "/siː juː ˈleɪtər/", "category": "Chào hỏi & Đời sống" },
+      { "english": "excuse me", "vi": "xin lỗi, làm phiền", "ipa": "/ɪkˈskjuːz miː/", "category": "Chào hỏi & Đời sống" },
+      { "english": "of course", "vi": "tất nhiên rồi", "ipa": "/əv kɔːs/", "category": "Chào hỏi & Đời sống" },
+      { "english": "at home", "vi": "ở nhà", "ipa": "/æt həʊm/", "category": "Gia đình & Bạn bè" },
+      { "english": "in the morning", "vi": "vào buổi sáng", "ipa": "/ɪn ðə ˈmɔːnɪŋ/", "category": "Chào hỏi & Đời sống" },
+      { "english": "have a good day", "vi": "chúc một ngày tốt lành", "ipa": "/hæv ə ɡʊd deɪ/", "category": "Chào hỏi & Đời sống" },
+      { "english": "take care", "vi": "bảo trọng, giữ gìn sức khỏe", "ipa": "/teɪk keər/", "category": "Chào hỏi & Đời sống" },
+      { "english": "by the way", "vi": "nhân tiện", "ipa": "/baɪ ðə weɪ/", "category": "Giao tiếp" },
+      { "english": "right now", "vi": "ngay bây giờ", "ipa": "/raɪt naʊ/", "category": "Thời gian" },
+      { "english": "look at", "vi": "nhìn vào", "ipa": "/lʊk æt/", "category": "Hành động" },
+      { "english": "listen to", "vi": "lắng nghe", "ipa": "/ˈlɪsn tuː/", "category": "Hành động" },
+      { "english": "wait for", "vi": "chờ đợi", "ipa": "/weɪt fɔːr/", "category": "Hành động" }
+    ],
+    "sentences": [
+      { "english": "What is your name?", "vi": "Tên của bạn là gì?", "ipa": "/wɒt ɪz jɔːr neɪm/", "category": "Chào hỏi" },
+      { "english": "Where are you from?", "vi": "Bạn đến từ đâu?", "ipa": "/weər ɑːr juː frɒm/", "category": "Chào hỏi" },
+      { "english": "I am learning English every day.", "vi": "Tôi học tiếng Anh mỗi ngày.", "ipa": "/aɪ æm ˈlɜːnɪŋ ˈɪŋɡlɪʃ ˈevri deɪ/", "category": "Giáo dục" },
+      { "english": "The weather is very nice today.", "vi": "Thời tiết hôm nay rất đẹp.", "ipa": "/ðə ˈweðər ɪz ˈveri naɪs təˈdeɪ/", "category": "Thời tiết" },
+      { "english": "Can you help me please?", "vi": "Bạn có thể giúp tôi được không?", "ipa": "/kæn juː help miː pliːz/", "category": "Giao tiếp" },
+      { "english": "I would like a cup of coffee.", "vi": "Tôi muốn một tách cà phê.", "ipa": "/aɪ wʊd laɪk ə kʌp əv ˈkɒfi/", "category": "Ẩm thực" },
+      { "english": "She goes to school by bus.", "vi": "Cô ấy đi học bằng xe buýt.", "ipa": "/ʃiː ɡəʊz tuː skuːl baɪ bʌs/", "category": "Đời sống" },
+      { "english": "They are my best friends.", "vi": "Họ là những người bạn thân nhất của tôi.", "ipa": "/ðeɪ ɑːr maɪ best frendz/", "category": "Gia đình & Bạn bè" },
+      { "english": "This book is very interesting.", "vi": "Cuốn sách này rất thú vị.", "ipa": "/ðɪs bʊk ɪz ˈveri ˈɪntrəstɪŋ/", "category": "Giáo dục" },
+      { "english": "We eat dinner at seven o'clock.", "vi": "Chúng tôi ăn tối lúc bảy giờ.", "ipa": "/wiː iːt ˈdɪnər æt ˈsevn əˈklɒk/", "category": "Ẩm thực" }
+    ]
+  },
+  "A2": {
+    "phrases": [
+      { "english": "as soon as possible", "vi": "càng sớm càng tốt", "ipa": "/æz suːn æz ˈpɒsəbl/", "category": "Thời gian" },
+      { "english": "give up", "vi": "từ bỏ", "ipa": "/ɡɪv ʌp/", "category": "Hành động" },
+      { "english": "find out", "vi": "tìm ra, khám phá", "ipa": "/faɪnd aʊt/", "category": "Hành động" },
+      { "english": "depend on", "vi": "phụ thuộc vào", "ipa": "/dɪˈpend ɒn/", "category": "Quan hệ" },
+      { "english": "look forward to", "vi": "mong đợi, trông chờ", "ipa": "/lʊk ˈfɔːwəd tuː/", "category": "Cảm xúc" },
+      { "english": "take off", "vi": "cất cánh, cởi ra", "ipa": "/teɪk ɒf/", "category": "Du lịch" },
+      { "english": "turn on", "vi": "bật lên (thiết bị)", "ipa": "/tɜːn ɒn/", "category": "Đời sống" },
+      { "english": "turn off", "vi": "tắt đi (thiết bị)", "ipa": "/tɜːn ɒf/", "category": "Đời sống" },
+      { "english": "get along with", "vi": "hòa thuận với", "ipa": "/ɡet əˈlɒŋ wɪð/", "category": "Giao tiếp" },
+      { "english": "run out of", "vi": "hết, cạn kiệt", "ipa": "/rʌn aʊt əv/", "category": "Đời sống" },
+      { "english": "pay attention to", "vi": "chú ý đến", "ipa": "/peɪ əˈtenʃn tuː/", "category": "Học tập" },
+      { "english": "make a mistake", "vi": "phạm sai lầm", "ipa": "/meɪk ə mɪˈsteɪk/", "category": "Học tập" },
+      { "english": "take part in", "vi": "tham gia vào", "ipa": "/teɪk pɑːt ɪn/", "category": "Hoạt động" },
+      { "english": "in front of", "vi": "ở phía trước", "ipa": "/ɪn frʌnt əv/", "category": "Vị trí" },
+      { "english": "at the same time", "vi": "cùng một lúc", "ipa": "/æt ðə seɪm taɪm/", "category": "Thời gian" }
+    ],
+    "sentences": [
+      { "english": "I am looking forward to our vacation next month.", "vi": "Tôi đang rất mong chờ kỳ nghỉ của chúng ta vào tháng tới.", "ipa": "/aɪ æm ˈlʊkɪŋ ˈfɔːwəd tuː ˈaʊər vəˈkeɪʃn nekst mʌnθ/", "category": "Du lịch" },
+      { "english": "She decided to learn how to drive a car.", "vi": "Cô ấy quyết định học cách lái xe ô tô.", "ipa": "/ʃiː dɪˈsaɪdɪd tuː lɜːn haʊ tuː draɪv ə kɑːr/", "category": "Kỹ năng" },
+      { "english": "We ran out of milk this morning.", "vi": "Sáng nay chúng tôi đã hết sữa.", "ipa": "/wiː ræn aʊt əv mɪlk ðɪs ˈmɔːnɪŋ/", "category": "Đời sống" },
+      { "english": "Could you tell me how to get to the airport?", "vi": "Bạn có thể chỉ cho tôi đường đến sân bay được không?", "ipa": "/kʊd juː tel miː haʊ tuː ɡet tuː ði ˈeəpɔːt/", "category": "Du lịch" },
+      { "english": "He has been working at this company for two years.", "vi": "Anh ấy đã làm việc tại công ty này được hai năm.", "ipa": "/hiː hæz biːn ˈwɜːkɪŋ æt ðɪs ˈkʌmpəni fɔːr tuː jɪəz/", "category": "Công việc" },
+      { "english": "Remember to turn off the lights before you leave.", "vi": "Hãy nhớ tắt đèn trước khi bạn rời đi.", "ipa": "/rɪˈmembər tuː tɜːn ɒf ðə laɪts bɪˈfɔːr juː liːv/", "category": "Đời sống" },
+      { "english": "If it rains tomorrow, we will stay at home.", "vi": "Nếu ngày mai trời mưa, chúng tôi sẽ ở nhà.", "ipa": "/ɪf ɪt reɪnz təˈmɒrəʊ wiː wɪl steɪ æt həʊm/", "category": "Thời tiết" },
+      { "english": "She enjoys listening to classical music in her free time.", "vi": "Cô ấy thích nghe nhạc cổ điển vào thời gian rảnh.", "ipa": "/ʃiː ɪnˈdʒɔɪz ˈlɪsnɪŋ tuː ˈklæsɪkl ˈmjuːzɪk ɪn hɜː friː taɪm/", "category": "Giải trí" }
+    ]
+  },
+  "B1": {
+    "phrases": [
+      { "english": "in order to", "vi": "để, nhằm mục đích", "ipa": "/ɪn ˈɔːdər tuː/", "category": "Mục đích" },
+      { "english": "as a result", "vi": "kết quả là", "ipa": "/æz ə rɪˈzʌlt/", "category": "Kết quả" },
+      { "english": "on the other hand", "vi": "mặt khác", "ipa": "/ɒn ði ˈʌðər hænd/", "category": "Lập luận" },
+      { "english": "in addition to", "vi": "ngoài ra, thêm vào đó", "ipa": "/ɪn əˈdɪʃn tuː/", "category": "Bổ sung" },
+      { "english": "take advantage of", "vi": "tận dụng cơ hội", "ipa": "/teɪk ədˈvɑːntɪdʒ əv/", "category": "Cơ hội" },
+      { "english": "keep in touch", "vi": "giữ liên lạc", "ipa": "/kiːp ɪn tʌtʃ/", "category": "Giao tiếp" },
+      { "english": "make a decision", "vi": "đưa ra quyết định", "ipa": "/meɪk ə dɪˈsɪʒn/", "category": "Công việc" },
+      { "english": "bear in mind", "vi": "ghi nhớ trong đầu", "ipa": "/beər ɪn maɪnd/", "category": "Tư duy" },
+      { "english": "come up with", "vi": "nghĩ ra (ý tưởng, giải pháp)", "ipa": "/kʌm ʌp wɪð/", "category": "Sáng tạo" },
+      { "english": "figure out", "vi": "tìm ra cách giải quyết", "ipa": "/ˈfɪɡər aʊt/", "category": "Tư duy" },
+      { "english": "cope with", "vi": "đối phó, đương đầu với", "ipa": "/kəʊp wɪð/", "category": "Thử thách" },
+      { "english": "put off", "vi": "trì hoãn", "ipa": "/pʊt ɒf/", "category": "Hành động" },
+      { "english": "carry out", "vi": "tiến hành, thực hiện", "ipa": "/ˈkæri aʊt/", "category": "Hành động" },
+      { "english": "in terms of", "vi": "xét về mặt, về phương diện", "ipa": "/ɪn tɜːmz əv/", "category": "Đánh giá" }
+    ],
+    "sentences": [
+      { "english": "In order to succeed, you must stay focused on your goals.", "vi": "Để thành công, bạn phải luôn tập trung vào mục tiêu của mình.", "ipa": "/ɪn ˈɔːdər tuː səkˈsiːd juː mʌst steɪ ˈfəʊkəst ɒn jɔːr ɡəʊlz/", "category": "Thành công" },
+      { "english": "She came up with a creative solution to the problem.", "vi": "Cô ấy đã nghĩ ra một giải pháp sáng tạo cho vấn đề.", "ipa": "/ʃiː keɪm ʌp wɪð ə kriˈeɪtɪv səˈluːʃn tuː ðə ˈprɒbləm/", "category": "Sáng tạo" },
+      { "english": "Technology plays an essential role in modern education.", "vi": "Công nghệ đóng vai trò thiết yếu trong giáo dục hiện đại.", "ipa": "/tekˈnɒlədʒi pleɪz æn ɪˈsenʃl rəʊl ɪn ˈmɒdn ˌedʒuˈkeɪʃn/", "category": "Công nghệ" },
+      { "english": "We need to make an important decision before tomorrow morning.", "vi": "Chúng ta cần đưa ra một quyết định quan trọng trước sáng mai.", "ipa": "/wiː niːd tuː meɪk æn ɪmˈpɔːtnt dɪˈsɪʒn bɪˈfɔːr təˈmɒrəʊ ˈmɔːnɪŋ/", "category": "Quyết định" },
+      { "english": "Although the task was difficult, they completed it on time.", "vi": "Mặc dù nhiệm vụ khó khăn, họ đã hoàn thành đúng hạn.", "ipa": "/ɔːlˈðəʊ ðə tɑːsk wɒz ˈdɪfɪkəlt ðeɪ kəmˈpliːtɪd ɪt ɒn taɪm/", "category": "Công việc" },
+      { "english": "Regular exercise contributes significantly to mental well-being.", "vi": "Tập thể dục thường xuyên đóng góp đáng kể cho sức khỏe tinh thần.", "ipa": "/ˈreɡjələr ˈeksəsaɪz kənˈtrɪbjuːts sɪɡˈnɪfɪkəntli tuː ˈmentl ˌwelˈbiːɪŋ/", "category": "Sức khỏe" }
+    ]
+  },
+  "B2": {
+    "phrases": [
+      { "english": "a piece of cake", "vi": "dễ như ăn bánh", "ipa": "/ə piːs əv keɪk/", "category": "Thành ngữ" },
+      { "english": "break the ice", "vi": "phá vỡ bầu không khí ngại ngùng", "ipa": "/breɪk ði aɪs/", "category": "Giao tiếp" },
+      { "english": "bite the bullet", "vi": "cắn răng chịu đựng, chấp nhận khó khăn", "ipa": "/baɪt ðə ˈbʊlɪt/", "category": "Thành ngữ" },
+      { "english": "burn the midnight oil", "vi": "thức khuya làm việc, học bài", "ipa": "/bɜːn ðə ˈmɪdnaɪt ɔɪl/", "category": "Học tập" },
+      { "english": "cost an arm and a leg", "vi": "vô cùng đắt đỏ", "ipa": "/kɒst æn ɑːm ænd ə leɡ/", "category": "Mua sắm" },
+      { "english": "hit the nail on the head", "vi": "nói trúng phóc, hoàn toàn chính xác", "ipa": "/hɪt ðə neɪl ɒn ðə hed/", "category": "Thành ngữ" },
+      { "english": "leave no stone unturned", "vi": "làm mọi cách, không bỏ sót điều gì", "ipa": "/liːv nəʊ stəʊn ʌnˈtɜːnd/", "category": "Thành ngữ" },
+      { "english": "see eye to eye", "vi": "đồng thuận, cùng quan điểm", "ipa": "/siː aɪ tuː aɪ/", "category": "Quan điểm" },
+      { "english": "under the weather", "vi": "cảm thấy không khỏe, mệt mỏi", "ipa": "/ˈʌndər ðə ˈweðər/", "category": "Sức khỏe" },
+      { "english": "call it a day", "vi": "kết thúc một ngày làm việc", "ipa": "/kɔːl ɪt ə deɪ/", "category": "Công việc" },
+      { "english": "actions speak louder than words", "vi": "hành động có ý nghĩa hơn lời nói", "ipa": "/ˈækʃnz spiːk ˈlaʊdər ðæn wɜːdz/", "category": "Châm ngôn" }
+    ],
+    "sentences": [
+      { "english": "The new government policy will have a profound impact on economic growth.", "vi": "Chính sách mới của chính phủ sẽ có tác động sâu sắc đến tăng trưởng kinh tế.", "ipa": "/ðə njuː ˈɡʌvənmənt ˈpɒləsi wɪl hæv ə prəˈfaʊnd ˈɪmpækt ɒn ˌiːkəˈnɒmɪk ɡrəʊθ/", "category": "Kinh tế" },
+      { "english": "Despite facing numerous obstacles, they managed to achieve their targets.", "vi": "Dù đối mặt với vô số trở ngại, họ vẫn cố gắng đạt được mục tiêu.", "ipa": "/dɪˈspaɪt ˈfeɪsɪŋ ˈnjuːmərəs ˈɒbstəklz ðeɪ ˈmænɪdʒd tuː əˈtʃiːv ðeər ˈtɑːɡɪts/", "category": "Kinh doanh" },
+      { "english": "Effective communication is the cornerstone of successful leadership.", "vi": "Giao tiếp hiệu quả là nền tảng cốt lõi của năng lực lãnh đạo thành công.", "ipa": "/ɪˈfektɪv kəˌmjuːnɪˈkeɪʃn ɪz ðə ˈkɔːnəstəʊn əv səkˈsesfl ˈliːdəʃɪp/", "category": "Lãnh đạo" },
+      { "english": "Environmental sustainability requires collective responsibility from society.", "vi": "Tính bền vững môi trường đòi hỏi trách nhiệm tập thể từ toàn xã hội.", "ipa": "/ɪnˌvaɪrənˈmentl səˌsteɪnəˈbɪləti rɪˈkwaɪəz kəˈlektɪv rɪˌspɒnsəˈbɪləti frɒm səˈsaɪəti/", "category": "Môi trường" }
+    ]
+  },
+  "C1": {
+    "phrases": [
+      { "english": "devil's advocate", "vi": "người cố ý phản biện để tìm kẽ hở", "ipa": "/ˈdevlz ˈædvəkət/", "category": "Học thuật" },
+      { "english": "the tip of the iceberg", "vi": "phần nổi của tảng băng chìm", "ipa": "/ðə tɪp əv ði ˈaɪsbɜːɡ/", "category": "Phân tích" },
+      { "english": "blessing in disguise", "vi": "trong cái rủi có cái may", "ipa": "/ˈblesɪŋ ɪn dɪsˈɡaɪz/", "category": "Thành ngữ" },
+      { "english": "once in a blue moon", "vi": "rất hiếm khi xảy ra", "ipa": "/wʌns ɪn ə bluː muːn/", "category": "Thời gian" },
+      { "english": "read between the lines", "vi": "hiểu được ẩn ý đằng sau lời nói", "ipa": "/riːd bɪˈtwiːn ðə laɪnz/", "category": "Tư duy" },
+      { "english": "through thick and thin", "vi": "cùng nhau trải qua mọi thăng trầm", "ipa": "/θruː θɪk ænd θɪn/", "category": "Tình bạn" },
+      { "english": "a double-edged sword", "vi": "con dao hai lưỡi", "ipa": "/ə ˈdʌbl edʒd sɔːd/", "category": "Học thuật" },
+      { "english": "food for thought", "vi": "điều đáng để suy ngẫm", "ipa": "/fuːd fɔː θɔːt/", "category": "Triết lý" },
+      { "english": "the elephant in the room", "vi": "vấn đề hiển nhiên nhưng mọi người tránh nói tới", "ipa": "/ði ˈelɪfənt ɪn ðə ruːm/", "category": "Xã hội" },
+      { "english": "a bitter pill to swallow", "vi": "sự thật cay đắng phải chấp nhận", "ipa": "/ə ˈbɪtər pɪl tuː ˈswɒləʊ/", "category": "Tâm lý" }
+    ],
+    "sentences": [
+      { "english": "The rapid advancement of artificial intelligence presents profound ethical dilemmas.", "vi": "Sự tiến bộ nhanh chóng của trí tuệ nhân tạo đặt ra những tình thế tiến thoái lưỡng nan về đạo đức.", "ipa": "/ðə ˈræpɪd ədˈvɑːnsmənt əv ˌɑːtɪˈfɪʃl ɪnˈtelɪdʒəns prɪˈzents prəˈfaʊnd ˈeθɪkl dɪˈleməz/", "category": "Học thuật" },
+      { "english": "Her eloquent discourse captivated the entire auditorium of scholars and diplomats.", "vi": "Bài phát biểu đầy hùng biện của bà đã thu hút toàn bộ hội trường gồm các học giả và nhà ngoại giao.", "ipa": "/hɜːr ˈeləkwənt ˈdɪskɔːs ˈkæptɪveɪtɪd ði ɪnˈtaɪər ˌɔːdɪˈtɔːriəm əv ˈskɒləz ænd ˈdɪpləmæts/", "category": "Ngoại giao" },
+      { "english": "Socioeconomic disparities inevitably exacerbate cultural fragmentation in modern cities.", "vi": "Sự chênh lệch kinh tế xã hội chắc chắn làm gia tăng sự phân mảnh văn hóa ở các đô thị hiện đại.", "ipa": "/ˌsəʊsiəʊˌekəˈnɒmɪk dɪˈspærətiz ɪnˈevɪtəbli ɪɡˈzæsəbeɪt ˈkʌltʃərəl ˌfræɡmenˈteɪʃn ɪn ˈmɒdn ˈsɪtiz/", "category": "Xã hội" },
+      { "english": "Scientific breakthroughs often stem from meticulous and persistent experimentation.", "vi": "Các đột phá khoa học thường bắt nguồn từ những thử nghiệm tỉ mỉ và kiên trì.", "ipa": "/ˌsaɪənˈtɪfɪk ˈbreɪkθruːz ˈɒfn stem frɒm məˈtɪkjələs ænd pəˈsɪstənt ɪkˌsperɪmenˈteɪʃn/", "category": "Khoa học" }
+    ]
+  }
+}

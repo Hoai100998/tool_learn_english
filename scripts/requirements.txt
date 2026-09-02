@@ -1,0 +1,5 @@
+# English Dictation & Vocabulary Pipeline Dependencies
+edge-tts>=6.1.12
+google-genai>=0.1.1
+aiohttp
+tqdm

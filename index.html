@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DictaLearn - Luyện Nghe Chép Chính Tả & Từ Vựng Tiếng Anh CEFR</title>
+  <meta name="description" content="Nền tảng luyện nghe chép chính tả tiếng Anh theo chuẩn Oxford 3000 và khung CEFR (A1 - C1) tích hợp thuật toán Spaced Repetition (SRS) và Diff Engine so khớp thông minh.">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./assets/icon-192.svg">
+
+  <!-- Google Fonts: Outfit & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/style.css?v=40">
+  <link rel="stylesheet" href="./css/diff.css?v=40">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- 1. Header Bar with Brand, Centered Nav Tabs & Actions -->
+    <header class="app-header">
+      <div class="brand" id="brandLogo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+        </div>
+        <h1 class="brand-title">DictaLearn</h1>
+        <span class="brand-badge">CEFR</span>
+      </div>
+
+      <!-- Center Navigation Tabs (Linear Style) -->
+      <nav class="header-nav-tabs">
+        <button class="view-pill active" id="tabPractice">
+          <span>📚 Luyện gõ</span>
+        </button>
+        <button class="view-pill" id="tabSpeaking" style="color: var(--accent-cyan);">
+          <span>🎙️ Luyện nói</span>
+        </button>
+        <button class="view-pill" id="tabReview">
+          <span>🔄 Ôn tập</span>
+          <span class="badge-count" id="reviewCountBadge">0</span>
+        </button>
+        <button class="view-pill" id="tabPlan">
+          <span>📅 Lộ trình 30 ngày</span>
+        </button>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Streak Widget -->
+        <div class="streak-chip" id="streakWidget" title="Chuỗi ngày học liên tiếp">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 23c-4.97 0-9-3.8-9-8.5 0-3.37 2.15-6.28 4.09-8.5.54-.62 1.48-.19 1.43.64-.13 2.05.8 3.86 2.37 4.96.3.21.71-.03.68-.4-.18-2.3.94-4.8 2.87-6.73.54-.54 1.47-.19 1.5.58.07 1.95.89 3.73 2.19 4.95.27.26.71.06.7-.31-.08-2.07 1.05-3.9 2.53-5.06.6-.47 1.46.06 1.34.82C22.14 11.23 21 17.06 21 14.5c0 4.7-4.03 8.5-9 8.5z"/>
+          </svg>
+          <span id="streakCounter">1 ngày</span>
+        </div>
+
+        <button class="btn-icon" id="studyPlanBtn" title="Kế hoạch 30 ngày & Nhiệm vụ hôm nay" aria-label="Kế hoạch">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </button>
+
+        <button class="btn-icon" id="apiModalBtn" title="Tải thêm từ vựng & câu từ Online API" aria-label="Online API">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 0 1 9-9"></path>
+          </svg>
+        </button>
+
+        <button class="btn-icon" id="shortcutsModalBtn" title="Phím tắt bàn phím" aria-label="Phím tắt">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M6 12h.001M10 12h.001M14 12h.001M18 12h.001M8 16h8"></path>
+          </svg>
+        </button>
+
+        <button class="btn-icon" id="statsModalBtn" title="Thống kê học tập & SRS" aria-label="Thống kê">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+        </button>
+
+        <button class="btn-icon" id="themeToggleBtn" title="Đổi giao diện Sáng / Tối" aria-label="Đổi giao diện">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- 2. Sub-Toolbar: Levels, Modes, Accent & Daily Mission Mini Strip -->
+    <div class="sub-toolbar">
+      <div class="filter-left-group">
+        <span class="filter-label">Cấp độ:</span>
+        <div id="levelPills" class="pill-group">
+          <!-- Dynamic Level Pills (A1, A2, B1, B2, C1) -->
+        </div>
+
+        <span class="filter-label" style="margin-left: 0.4rem;">Loại:</span>
+        <div class="pill-group">
+          <button class="mode-pill active" data-mode="all">Tất cả</button>
+          <button class="mode-pill" data-mode="word">Từ đơn</button>
+          <button class="mode-pill" data-mode="phrase">Cụm từ</button>
+          <button class="mode-pill" data-mode="sentence">Câu</button>
+        </div>
+
+        <div class="voice-select-wrap">
+          <span>🌐</span>
+          <select id="voiceSelect" title="Chọn chất giọng">
+            <option value="en-US">US (Mỹ)</option>
+            <option value="en-GB">UK (Anh)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Integrated Daily Mission Mini Strip -->
+      <div class="daily-mission-strip" id="dailyMissionWidget">
+        <span class="mission-strip-title" id="dailyMissionDayTitle">🎯 Ngày 1</span>
+        <div class="mission-mini-progress-bar" title="Tiến độ mục tiêu hôm nay">
+          <div class="mission-mini-progress-fill" id="dailyProgressBar" style="width: 0%;"></div>
+        </div>
+        <span id="dailyProgressPercent" style="display: none;">0%</span>
+        <div class="mission-mini-targets">
+          <span title="Từ vựng">🔤 <strong id="missionWordsVal">0/20</strong></span>
+          <span title="Cụm từ">💬 <strong id="missionPhrasesVal">0/5</strong></span>
+          <span title="Câu giao tiếp">📝 <strong id="missionSentencesVal">0/5</strong></span>
+          <span title="Luyện nói">🎙️ <strong id="missionSpeakingVal">0/5</strong></span>
+        </div>
+        <span id="dailyPhaseLabel" style="display: none;">Giai đoạn 1</span>
+        <button class="btn-mini-save" id="btnCompleteDay" title="Lưu tiến độ vào tệp">💾 Lưu</button>
+        <button class="btn-mini-save" id="btnOpenRoadmapModal" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);" title="Xem toàn bộ lộ trình 30 ngày">📅 Lộ trình</button>
+      </div>
+    </div>
+
+    <!-- 3. Main Dictation Studio Card (100vh Centered Workspace) -->
+    <main class="studio-card" id="studioCard">
+      <!-- Card Header -->
+      <div class="studio-header">
+        <div class="item-meta">
+          <span class="tag-level" id="tagLevel">A1</span>
+          <span class="tag-type" id="tagType">Word</span>
+          <button class="shuffle-btn active" id="btnShuffleToggle" title="Bật/Tắt chế độ xáo trộn ngẫu nhiên từ vựng">
+            <span>🔀 Ngẫu nhiên</span>
+          </button>
+        </div>
+        <div class="progress-indicator" id="progressIndicator">1 / 5000</div>
+      </div>
+
+      <!-- Speaking Practice Mode Box (Active when in Speaking Tab) -->
+      <div class="speaking-practice-box" id="speakingPracticeBox" style="display: none;">
+        <div class="speaking-header">
+          <div class="speaking-badge">🎙️ Chế độ Luyện Nói & Nhận Diện Phát Âm AI</div>
+          <button class="btn-listen-model" id="btnListenModelAudio" title="Nghe người bản xứ phát âm mẫu">
+            🔊 Nghe đọc mẫu
+          </button>
+        </div>
+
+        <div class="speaking-prompt-card" id="speakingPromptCard">
+          <div class="speaking-target-en" id="speakingTargetEn">What is your name?</div>
+          <div class="speaking-target-ipa" id="speakingTargetIPA">/wɒt ɪz jɔːr neɪm/</div>
+          <div class="speaking-target-vi-row">
+            <div class="speaking-target-vi" id="speakingTargetVi">Tên bạn là gì?</div>
+            <button class="btn-edit-vi-small" id="btnEditViSpeaking" title="Cập nhật nghĩa tiếng Việt mới nếu thấy chưa đúng">
+              ✏️ Sửa nghĩa
+            </button>
+          </div>
+          <div class="inline-vi-edit-form" id="inlineViEditFormSpeaking" style="display: none;">
+            <input type="text" id="customViInputSpeaking" class="custom-vi-input" placeholder="Nhập nghĩa tiếng Việt chuẩn xác..." />
+            <button class="btn-save-vi" id="btnSaveViSpeaking">Lưu nghĩa</button>
+            <button class="btn-cancel-vi" id="btnCancelViSpeaking">Hủy</button>
+          </div>
+        </div>
+
+        <!-- Mic Recording Center -->
+        <div class="speaking-mic-center">
+          <button class="btn-speak-mic" id="btnSpeakMic" title="Bấm vào micro để nói">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </button>
+
+          <div class="speaking-wave-visualizer" id="speakingWaveVisualizer" style="display: none;">
+            <div class="speaking-wave-bar"></div>
+            <div class="speaking-wave-bar"></div>
+            <div class="speaking-wave-bar"></div>
+            <div class="speaking-wave-bar"></div>
+            <div class="speaking-wave-bar"></div>
+          </div>
+
+          <div class="speaking-status-text" id="speakingStatusText">
+            🎙️ Bấm vào Micro và đọc to câu/từ tiếng Anh trên
+          </div>
+
+          <div class="speaking-transcript" id="speakingTranscript"></div>
+        </div>
+
+        <!-- Pronunciation Evaluation Result -->
+        <div class="speaking-result-box" id="speakingResultBox" style="display: none;">
+          <div class="speaking-score-header">
+            <div class="speaking-score-circle" id="speakingScoreVal">95%</div>
+            <div class="speaking-score-info">
+              <div class="speaking-score-rating" id="speakingScoreRating">🌟 Xuất sắc! Phát âm rất chuẩn!</div>
+              <div class="speaking-score-desc">Độ khớp âm và từ ngữ với mẫu bản xứ:</div>
+            </div>
+          </div>
+
+          <div class="speaking-word-breakdown" id="speakingWordBreakdown">
+            <!-- Word badges with checkmarks -->
+          </div>
+
+          <div class="speaking-actions-row">
+            <button class="btn-secondary" id="btnRetrySpeaking">🔄 Thử nói lại</button>
+            <button class="btn-primary" id="btnNextSpeaking">Tiếp tục câu mới ➔</button>
+          </div>
+        </div>
+
+        <!-- Microphone Permission & Localhost Tip Banner -->
+        <div class="speaking-mic-tip-banner">
+          <span>💡 <strong>Lưu ý:</strong> Vui lòng sử dụng <strong>Google Chrome</strong> hoặc <strong>Microsoft Edge</strong>. Khi trình duyệt hỏi, hãy chọn <strong>Cho phép (Allow) Micro</strong>. Bạn cũng có thể nhấp đúp file <code>run_app.bat</code> để chạy qua <code>http://localhost:5500</code> giúp Micro hoạt động 100% mượt mà!</span>
+        </div>
+      </div>
+
+      <!-- Sound Wave Visualizer & Audio Player Center (For Typing Practice) -->
+      <div class="audio-visual-box" id="audioVisualBox">
+        <div class="wave-visualizer">
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+        </div>
+
+        <div class="audio-controls">
+          <!-- Play / Pause Hero Button -->
+          <button class="btn-play-hero" id="btnPlayHero" title="Phát âm thanh (Phím Space)">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </button>
+
+          <!-- Speed Controls -->
+          <div class="speed-selector" title="Tốc độ phát">
+            <button class="speed-btn" data-speed="0.5">0.5x</button>
+            <button class="speed-btn active" data-speed="0.8">0.8x (Mặc định)</button>
+            <button class="speed-btn" data-speed="1.0">1.0x</button>
+            <button class="speed-btn" data-speed="1.2">1.2x</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permanent Always-Visible Vietnamese Meaning & Edit Bar -->
+      <div class="permanent-meaning-bar" id="permanentMeaningBar">
+        <div class="meaning-bar-top">
+          <div class="meaning-bar-left">
+            <span class="meaning-label-tag">🇻🇳 Nghĩa tiếng Việt:</span>
+            <strong class="meaning-text-display" id="permanentMeaningText">Đang tải nghĩa...</strong>
+            <button class="btn-edit-vi-permanent" id="btnEditViPermanent" title="Sửa nghĩa tiếng Việt nếu chưa đúng">
+              ✏️ Sửa nghĩa
+            </button>
+            <span class="meaning-ipa-tag" id="permanentIpaTag">/ipa/</span>
+          </div>
+          <div class="meaning-bar-actions">
+            <button class="btn-toggle-meaning" id="btnToggleMeaning" title="Ẩn/Hiện nghĩa tiếng Việt để thử thách bản thân">
+              👁️ Ẩn/Hiện nghĩa
+            </button>
+          </div>
+        </div>
+
+        <!-- Inline Edit Form (Shown when clicking Sửa nghĩa) -->
+        <div class="inline-vi-edit-form" id="inlineViEditFormPermanent" style="display: none;">
+          <input type="text" id="customViInputPermanent" class="custom-vi-input" placeholder="Nhập nghĩa tiếng Việt chuẩn xác tại đây (Nhấn Enter để lưu)..." />
+          <button class="btn-save-vi" id="btnSaveViPermanent">Lưu nghĩa</button>
+          <button class="btn-cancel-vi" id="btnCancelViPermanent">Hủy</button>
+        </div>
+      </div>
+
+      <!-- Interactive Word Slots Board (Word-by-word visual placeholder) -->
+      <div class="word-slots-board-container">
+        <div class="word-slots-header">
+          <span>🔤 Khung từ vựng & số lượng chữ cái:</span>
+          <span id="slotsMatchCount" style="color: var(--accent-cyan); font-family: var(--font-mono);">0 / 0 từ</span>
+        </div>
+        <div class="word-slots-board" id="wordSlotsBoard">
+          <!-- Dynamic Word Slots (e.g. [****], [*******], ...) -->
+        </div>
+
+        <!-- Instant Translation Banner shown upon completion -->
+        <div class="instant-translation-card" id="instantTranslationCard" style="display: none;">
+          <div class="trans-top-row">
+            <span class="trans-badge-label">✨ Nghĩa Tiếng Việt:</span>
+            <span class="trans-ipa" id="instantIPA">/ˈbrek.fəst/</span>
+            <span class="trans-category" id="instantCategory">Ẩm thực</span>
+            <button class="btn-edit-vi-small" id="btnEditViInstant" title="Cập nhật nghĩa tiếng Việt">
+              ✏️ Sửa nghĩa
+            </button>
+          </div>
+          <div class="trans-main-text" id="instantVietnamese">bữa ăn sáng</div>
+
+          <div class="inline-vi-edit-form" id="inlineViEditFormInstant" style="display: none;">
+            <input type="text" id="customViInputInstant" class="custom-vi-input" placeholder="Nhập nghĩa tiếng Việt chuẩn xác..." />
+            <button class="btn-save-vi" id="btnSaveViInstant">Lưu nghĩa</button>
+            <button class="btn-cancel-vi" id="btnCancelViInstant">Hủy</button>
+          </div>
+
+          <div class="trans-example-text" id="instantExample" style="display: none;"></div>
+          <div class="trans-next-cue">
+            <span>Nhấn phím <span class="key-badge">Enter ↵</span> để qua câu tiếp theo ngay</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Writing & Input Area -->
+      <div class="input-section">
+        <div class="input-container">
+          <textarea 
+            id="dictationInput" 
+            class="dictation-input" 
+            placeholder="Lắng nghe âm thanh và gõ từng từ theo khung trên (từ đúng: xanh lá, từ sai: đỏ)..." 
+            rows="3"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          ></textarea>
+          <div class="char-counter" id="charCounter">0 ký tự</div>
+        </div>
+
+        <!-- Action Toolbar -->
+        <div class="action-bar">
+          <div class="shortcuts-helper">
+            <span class="key-badge">Space</span> <span style="font-size: 0.75rem; color: var(--text-muted);">Nghe</span>
+            <span class="key-badge">Enter</span> <span style="font-size: 0.75rem; color: var(--text-muted);">Kiểm tra</span>
+            <span class="key-badge">Tab</span> <span style="font-size: 0.75rem; color: var(--text-muted);">Gợi ý</span>
+          </div>
+
+          <div class="actions-toolbar">
+            <button class="btn-secondary" id="btnReplay" title="Phát lại từ đầu">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 4v6h6M23 20v-6h-6"></path>
+                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+              </svg>
+              <span>Nghe lại</span>
+            </button>
+
+            <button class="btn-secondary btn-hint" id="btnHint" title="Mở một ký tự gợi ý (Tab)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18h6M10 22h4M15 9a3 3 0 1 0-6 0c0 1.66 1 3 2 4v2h2v-2c1-1 2-2.34 2-4z"></path>
+              </svg>
+              <span>Gợi ý</span>
+            </button>
+
+            <button class="btn-secondary" id="btnSkip" title="Bỏ qua câu này">
+              <span>Bỏ qua</span>
+            </button>
+
+            <button class="btn-primary" id="btnCheck" title="Kiểm tra đáp án (Enter)">
+              <span>Kiểm tra</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results & Diff Engine Panel -->
+      <section class="results-panel" id="resultsPanel">
+        <!-- Score Banner -->
+        <div class="score-banner">
+          <div class="accuracy-display">
+            <div class="accuracy-circle" id="accuracyCircle">100%</div>
+            <div class="feedback-headline">
+              <h4 id="feedbackTitle">Xuất sắc!</h4>
+              <p id="feedbackDesc">Bạn đã hoàn thành chính xác câu này.</p>
+            </div>
+          </div>
+          <button class="btn-primary" id="btnNextAfterResult" style="padding: 0.55rem 1.25rem;">
+            <span>Câu tiếp theo</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Token Diff Stream -->
+        <div class="diff-comparison-container">
+          <div class="diff-title">🔍 So khớp chi tiết từng từ:</div>
+          <div class="diff-tokens-stream" id="diffTokensStream">
+            <!-- Dynamic Diff Tokens injected here -->
+          </div>
+        </div>
+
+        <!-- Target Text, IPA & Vietnamese Translation -->
+        <div class="target-context-card" id="targetContextCard">
+          <div class="original-sentence">
+            <div class="original-text" id="originalText">Good morning, how are you today?</div>
+            <div class="ipa-badge" id="ipaBadge">/ɡʊd ˈmɔː.nɪŋ/</div>
+          </div>
+
+          <div class="vietnamese-translation-row">
+            <div class="vietnamese-translation">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span id="vietnameseText">Chào buổi sáng, hôm nay bạn thế nào?</span>
+            </div>
+            <button class="btn-edit-vi-small" id="btnEditViResult" title="Cập nhật nghĩa tiếng Việt">
+              ✏️ Sửa nghĩa
+            </button>
+          </div>
+
+          <div class="inline-vi-edit-form" id="inlineViEditFormResult" style="display: none;">
+            <input type="text" id="customViInputResult" class="custom-vi-input" placeholder="Nhập nghĩa tiếng Việt chuẩn xác..." />
+            <button class="btn-save-vi" id="btnSaveViResult">Lưu nghĩa</button>
+            <button class="btn-cancel-vi" id="btnCancelViResult">Hủy</button>
+          </div>
+
+          <div class="example-context-box" id="exampleBox" style="display: none;"></div>
+        </div>
+
+        <!-- Spaced Repetition Self-Rating -->
+        <div class="srs-rating-container">
+          <div class="srs-title">Đánh giá độ khó (Thuật toán lặp lại ngắt quãng SRS):</div>
+          <div class="srs-options">
+            <button class="srs-btn again" data-rating="1">
+              <span>Lại từ đầu</span>
+              <span class="sub">1 ngày (Phím 1)</span>
+            </button>
+            <button class="srs-btn hard" data-rating="3">
+              <span>Khó</span>
+              <span class="sub">2 ngày (Phím 2)</span>
+            </button>
+            <button class="srs-btn good" data-rating="4">
+              <span>Tốt</span>
+              <span class="sub">4 ngày (Phím 3)</span>
+            </button>
+            <button class="srs-btn easy" data-rating="5">
+              <span>Rất dễ</span>
+              <span class="sub">7 ngày (Phím 4)</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Analytics / Stats Modal -->
+  <div class="modal-backdrop" id="statsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>📊 Thống Kê Tiến Độ Học Tập</h3>
+        <button class="btn-icon modal-close" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="val" id="statTotalPracticed">0</div>
+          <div class="lbl">Tổng số lượt luyện tập</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="statAccuracyRate">100%</div>
+          <div class="lbl">Tỷ lệ chính xác trung bình</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="statMasteredCount">0</div>
+          <div class="lbl">Mục đã thuần thục (Mastered)</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="statReviewCount">0</div>
+          <div class="lbl">Mục trong hàng đợi ôn tập</div>
+        </div>
+        <div class="stat-card" style="grid-column: span 2;">
+          <div class="val" id="statStreak">1 ngày</div>
+          <div class="lbl">Chuỗi ngày học liên tục (Daily Streak) 🔥</div>
+        </div>
+      </div>
+
+      <!-- Backup & Reset Data -->
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+        <button class="btn-secondary" id="btnExportData">
+          <span>💾 Xuất dữ liệu (JSON)</span>
+        </button>
+        <button class="btn-secondary" id="btnImportData">
+          <span>📥 Nhập dữ liệu</span>
+        </button>
+        <input type="file" id="importFileInput" accept=".json" style="display: none;">
+        <button class="btn-secondary" id="btnResetData" style="color: var(--accent-rose); border-color: rgba(244, 63, 94, 0.3);">
+          <span>🗑️ Đặt lại tiến trình</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shortcuts Helper Modal -->
+  <div class="modal-backdrop" id="shortcutsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>⌨️ Danh Sách Phím Tắt Bàn Phím</h3>
+        <button class="btn-icon modal-close" aria-label="Đóng">✕</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+          <span>Phát / Tạm dừng âm thanh</span>
+          <span class="key-badge">Space</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+          <span>Phát lại từ đầu</span>
+          <span class="key-badge">Ctrl + Space</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+          <span>Kiểm tra kết quả / Chuyển câu tiếp</span>
+          <span class="key-badge">Enter</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+          <span>Lấy gợi ý từ / ký tự tiếp theo</span>
+          <span class="key-badge">Tab</span> hoặc <span class="key-badge">Ctrl + H</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+          <span>Chuyển câu tiếp theo / câu trước</span>
+          <span class="key-badge">Ctrl + →</span> / <span class="key-badge">Ctrl + ←</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+          <span>Đánh giá SRS nhanh khi hiển thị kết quả</span>
+          <span class="key-badge">Phím 1, 2, 3, 4</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Online API Fetch Modal -->
+  <div class="modal-backdrop" id="apiModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🌐 Lấy Dữ Liệu Từ Online Free API</h3>
+        <button class="btn-icon modal-close" aria-label="Đóng">✕</button>
+      </div>
+
+      <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+        Hệ thống tự động kết nối trực tiếp đến <strong>Free Dictionary API</strong>, <strong>Datamuse</strong> và <strong>MyMemory Translate</strong> để tải từ vựng kèm phiên âm IPA chuẩn, audio và dịch tiếng Việt tức thì!
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem; padding: 1rem; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+        <!-- Option 1: Fetch by topic -->
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">1. Tải từ vựng theo chủ đề</label>
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.4rem;">
+            <select id="apiTopicSelect" style="flex: 1; padding: 0.55rem; background: var(--bg-card-solid); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: var(--radius-sm); font-family: inherit;">
+              <option value="technology">💻 Công nghệ (Technology)</option>
+              <option value="business">💼 Kinh doanh (Business)</option>
+              <option value="environment">🌿 Môi trường (Environment)</option>
+              <option value="travel">✈️ Du lịch (Travel)</option>
+              <option value="education">🎓 Giáo dục (Education)</option>
+              <option value="health">🩺 Sức khỏe (Health & Medical)</option>
+              <option value="communication">💬 Giao tiếp (Communication)</option>
+            </select>
+            <button class="btn-primary" id="btnFetchApiWords" style="padding: 0.55rem 1rem; font-size: 0.85rem;">
+              <span>Tải 5 từ mới</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Option 2: Random Sentences -->
+        <div style="border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">2. Tải câu đàm thoại ngẫu nhiên</label>
+          <div style="margin-top: 0.4rem;">
+            <button class="btn-secondary" id="btnFetchApiSentences" style="width: 100%; justify-content: center;">
+              <span>💬 Tải 3 câu ví dụ mới từ Quotable & Translation API</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Option 3: Custom Input Word/Sentence -->
+        <div style="border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">3. Tự nhập từ hoặc câu bất kỳ để API tự động sinh bài</label>
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.4rem;">
+            <input type="text" id="customWordInput" placeholder="Ví dụ: extraordinary, artificial intelligence..." style="flex: 1; padding: 0.55rem 0.75rem; background: var(--bg-card-solid); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.9rem;">
+            <button class="btn-primary" id="btnFetchCustomWord" style="padding: 0.55rem 1rem; font-size: 0.85rem;">
+              <span>Thêm</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Loading / Status Feedback -->
+      <div id="apiStatusBox" style="display: none; padding: 0.75rem 1rem; border-radius: var(--radius-sm); font-size: 0.85rem; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color);"></div>
+    </div>
+  </div>
+
+  <!-- Adaptive Mastery Study Plan & Roadmap Modal -->
+  <div class="modal-backdrop" id="studyPlanModal">
+    <div class="modal-content" style="max-width: 820px; max-height: 88vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.4rem;">📅</span>
+          <div>
+            <h3 style="margin: 0; font-size: 1.2rem;">Kế Hoạch Học Đến Khi Giao Tiếp Thành Thạo</h3>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Luyện theo chu kỳ thích ứng: đời sống, đi làm, mua sắm, du lịch và phản xạ nói</span>
+          </div>
+        </div>
+        <button class="btn-icon modal-close" aria-label="Đóng">✕</button>
+      </div>
+
+      <div style="overflow-y: auto; padding-right: 4px; flex: 1;" id="studyRoadmapList">
+        <!-- Dynamically rendered 30-day timeline and summary card -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic Scripts -->
+  <script src="./js/dataset.js?v=50"></script>
+  <script src="./js/api_service.js?v=50"></script>
+  <script src="./js/diff.js?v=50"></script>
+  <script src="./js/audio.js?v=50"></script>
+  <script src="./js/srs.js?v=50"></script>
+  <script src="./js/speaking.js?v=50"></script>
+  <script src="./js/study_plan.js?v=50"></script>
+  <script src="./js/shortcuts.js?v=50"></script>
+  <script src="./js/app.js?v=50"></script>
+</body>
+</html>

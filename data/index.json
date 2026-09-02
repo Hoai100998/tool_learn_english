@@ -1,0 +1,57 @@
+{
+  "title": "CEFR English Dictation & Vocabulary Master Database",
+  "version": "1.0.0",
+  "levels": [
+    {
+      "code": "A1",
+      "name": "Beginner",
+      "description": "Từ vựng & câu giao tiếp cơ bản hàng ngày",
+      "total": 7050,
+      "types": { "word": 5000, "phrase": 1025, "sentence": 1025 },
+      "file": "data_A1.json",
+      "badgeColor": "#10b981"
+    },
+    {
+      "code": "A2",
+      "name": "Elementary",
+      "description": "Hội thoại, thói quen và tình huống quen thuộc",
+      "total": 7030,
+      "types": { "word": 5000, "phrase": 1015, "sentence": 1015 },
+      "file": "data_A2.json",
+      "badgeColor": "#06b6d4"
+    },
+    {
+      "code": "B1",
+      "name": "Intermediate",
+      "description": "Giao tiếp công việc, du lịch và thảo luận ý kiến",
+      "total": 7000,
+      "types": { "word": 5000, "phrase": 1000, "sentence": 1000 },
+      "file": "data_B1.json",
+      "badgeColor": "#6366f1"
+    },
+    {
+      "code": "B2",
+      "name": "Upper-Intermediate",
+      "description": "Văn phong học thuật, chuyên ngành và diễn đạt phức tạp",
+      "total": 7000,
+      "types": { "word": 5000, "phrase": 1000, "sentence": 1000 },
+      "file": "data_B2.json",
+      "badgeColor": "#a855f7"
+    },
+    {
+      "code": "C1",
+      "name": "Advanced",
+      "description": "Ngôn ngữ thành thạo, thành ngữ và lập luận tinh tế",
+      "total": 7000,
+      "types": { "word": 5000, "phrase": 1000, "sentence": 1000 },
+      "file": "data_C1.json",
+      "badgeColor": "#f59e0b"
+    }
+  ],
+  "modes": [
+    { "id": "all", "label": "Tất cả", "icon": "sparkles" },
+    { "id": "word", "label": "Từ đơn (Words)", "icon": "spell-check" },
+    { "id": "phrase", "label": "Cụm từ (Phrases)", "icon": "layers" },
+    { "id": "sentence", "label": "Câu hoàn chỉnh (Sentences)", "icon": "message-square" }
+  ]
+}
