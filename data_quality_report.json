@@ -1,742 +1,802 @@
 {
-    "generatedAt":  "2026-09-02T12:18:32.6501928+07:00",
+    "generatedAt":  "2026-09-03T14:34:33.5396743+07:00",
     "scope":  "Automated structural and heuristic QA; not a human lexical verification",
     "cefrStatus":  "unsupported: levels are frequency buckets, not verified CEFR labels",
     "counts":  {
-                   "total":  35000,
+                   "total":  35080,
                    "duplicateIds":  0,
                    "duplicateEnglish":  0,
-                   "missingRequired":  0,
+                   "missingRequired":  2,
                    "invalidLevel":  0,
                    "invalidType":  0,
-                   "missingIpa":  10000,
-                   "placeholderIpa":  10101,
-                   "suspiciousIpa":  8,
-                   "genericHint":  25000,
+                   "missingIpa":  10080,
+                   "placeholderIpa":  9862,
+                   "suspiciousIpa":  9,
+                   "genericHint":  0,
                    "genericExample":  25000,
-                   "suspiciousTranslation":  11,
+                   "suspiciousTranslation":  20,
                    "words":  25000,
-                   "phrases":  5000,
-                   "sentences":  5000
+                   "phrases":  5040,
+                   "sentences":  5040
                },
     "samples":  {
                     "placeholderIpa":  [
                                            {
-                                               "id":  "A1_0004",
+                                               "id":  "A1_W0004",
                                                "english":  "it",
                                                "value":  "/it/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0009",
+                                               "id":  "A1_W0009",
                                                "english":  "in",
                                                "value":  "/in/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0038",
+                                               "id":  "A1_W0038",
                                                "english":  "get",
                                                "value":  "/get/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0041",
+                                               "id":  "A1_W0041",
                                                "english":  "if",
                                                "value":  "/if/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0047",
+                                               "id":  "A1_W0047",
                                                "english":  "him",
                                                "value":  "/him/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0061",
+                                               "id":  "A1_W0055",
+                                               "english":  "yeah",
+                                               "value":  "/yeah/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0062",
                                                "english":  "did",
                                                "value":  "/did/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0066",
+                                               "id":  "A1_W0067",
                                                "english":  "let",
                                                "value":  "/let/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0127",
+                                               "id":  "A1_W0074",
+                                               "english":  "okay",
+                                               "value":  "/okay/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0088",
+                                               "english":  "gonna",
+                                               "value":  "/gonna/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0130",
                                                "english":  "help",
                                                "value":  "/help/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0156",
+                                               "id":  "A1_W0159",
                                                "english":  "put",
                                                "value":  "/put/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0164",
+                                               "id":  "A1_W0167",
                                                "english":  "things",
                                                "value":  "/things/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0168",
+                                               "id":  "A1_W0171",
                                                "english":  "years",
                                                "value":  "/years/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0170",
+                                               "id":  "A1_W0173",
                                                "english":  "does",
                                                "value":  "/does/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0177",
+                                               "id":  "A1_W0180",
                                                "english":  "guys",
                                                "value":  "/guys/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0183",
+                                               "id":  "A1_W0186",
                                                "english":  "big",
                                                "value":  "/big/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0202",
+                                               "id":  "A1_W0201",
+                                               "english":  "ok",
+                                               "value":  "/ok/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0206",
                                                "english":  "left",
                                                "value":  "/left/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0205",
+                                               "id":  "A1_W0209",
                                                "english":  "happened",
                                                "value":  "/happened/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0214",
+                                               "id":  "A1_W0218",
                                                "english":  "today",
                                                "value":  "/today/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0229",
+                                               "id":  "A1_W0233",
                                                "english":  "getting",
                                                "value":  "/getting/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0232",
+                                               "id":  "A1_W0236",
                                                "english":  "looking",
                                                "value":  "/looking/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0242",
+                                               "id":  "A1_W0246",
                                                "english":  "best",
                                                "value":  "/best/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0270",
+                                               "id":  "A1_W0268",
+                                               "english":  "huh",
+                                               "value":  "/huh/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0275",
                                                "english":  "called",
                                                "value":  "/called/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0281",
+                                               "id":  "A1_W0283",
+                                               "english":  "fuck",
+                                               "value":  "/fuck/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0287",
                                                "english":  "bit",
                                                "value":  "/bit/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0292",
+                                               "id":  "A1_W0298",
                                                "english":  "days",
                                                "value":  "/days/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0307",
+                                               "id":  "A1_W0313",
+                                               "english":  "um",
+                                               "value":  "/um/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0314",
                                                "english":  "end",
                                                "value":  "/end/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0311",
+                                               "id":  "A1_W0318",
                                                "english":  "looks",
                                                "value":  "/looks/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0312",
+                                               "id":  "A1_W0319",
                                                "english":  "fucking",
                                                "value":  "/fucking/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0313",
+                                               "id":  "A1_W0320",
                                                "english":  "problem",
                                                "value":  "/problem/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0315",
+                                               "id":  "A1_W0322",
                                                "english":  "friends",
                                                "value":  "/friends/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0319",
+                                               "id":  "A1_W0323",
+                                               "english":  "gotta",
+                                               "value":  "/gotta/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0327",
                                                "english":  "killed",
                                                "value":  "/killed/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0329",
+                                               "id":  "A1_W0337",
                                                "english":  "wants",
                                                "value":  "/wants/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0330",
+                                               "id":  "A1_W0338",
                                                "english":  "says",
                                                "value":  "/says/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0341",
+                                               "id":  "A1_W0345",
+                                               "english":  "later",
+                                               "value":  "/later/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0350",
                                                "english":  "having",
                                                "value":  "/having/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0344",
+                                               "id":  "A1_W0351",
+                                               "english":  "probably",
+                                               "value":  "/probably/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0354",
                                                "english":  "sit",
                                                "value":  "/sit/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0353",
+                                               "id":  "A1_W0363",
                                                "english":  "kids",
                                                "value":  "/kids/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0364",
+                                               "id":  "A1_W0374",
                                                "english":  "kid",
                                                "value":  "/kid/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0372",
+                                               "id":  "A1_W0382",
                                                "english":  "knows",
                                                "value":  "/knows/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0373",
+                                               "id":  "A1_W0383",
                                                "english":  "its",
                                                "value":  "/its/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0375",
+                                               "id":  "A1_W0385",
                                                "english":  "eyes",
                                                "value":  "/eyes/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0377",
+                                               "id":  "A1_W0387",
                                                "english":  "hit",
                                                "value":  "/hit/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0380",
+                                               "id":  "A1_W0390",
                                                "english":  "times",
                                                "value":  "/times/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0382",
+                                               "id":  "A1_W0392",
                                                "english":  "hands",
                                                "value":  "/hands/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0383",
+                                               "id":  "A1_W0393",
                                                "english":  "minutes",
                                                "value":  "/minutes/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0386",
+                                               "id":  "A1_W0396",
                                                "english":  "means",
                                                "value":  "/means/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0389",
+                                               "id":  "A1_W0399",
                                                "english":  "makes",
                                                "value":  "/makes/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0390",
+                                               "id":  "A1_W0400",
                                                "english":  "asked",
                                                "value":  "/asked/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0392",
+                                               "id":  "A1_W0402",
                                                "english":  "mine",
                                                "value":  "/mine/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0407",
+                                               "id":  "A1_W0417",
                                                "english":  "comes",
                                                "value":  "/comes/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0409",
+                                               "id":  "A1_W0419",
                                                "english":  "set",
                                                "value":  "/set/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0422",
+                                               "id":  "A1_W0432",
                                                "english":  "girls",
                                                "value":  "/girls/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0423",
+                                               "id":  "A1_W0433",
                                                "english":  "rest",
                                                "value":  "/rest/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0434",
+                                               "id":  "A1_W0438",
+                                               "english":  "mr",
+                                               "value":  "/mr/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0445",
                                                "english":  "started",
                                                "value":  "/started/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0439",
+                                               "id":  "A1_W0450",
                                                "english":  "goes",
                                                "value":  "/goes/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0440",
+                                               "id":  "A1_W0451",
                                                "english":  "hours",
                                                "value":  "/hours/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0449",
+                                               "id":  "A1_W0460",
+                                               "english":  "anymore",
+                                               "value":  "/anymore/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0461",
                                                "english":  "playing",
                                                "value":  "/playing/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0450",
+                                               "id":  "A1_W0462",
                                                "english":  "gets",
                                                "value":  "/gets/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0470",
-                                               "english":  "died",
-                                               "value":  "/died/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0474",
+                                               "id":  "A1_W0485",
                                                "english":  "seems",
                                                "value":  "/seems/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0485",
+                                               "id":  "A1_W0496",
+                                               "english":  "gun",
+                                               "value":  "/gun/",
+                                               "reason":  "IPA is just the English spelling"
+                                           },
+                                           {
+                                               "id":  "A1_W0497",
                                                "english":  "boys",
                                                "value":  "/boys/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0487",
+                                               "id":  "A1_W0499",
                                                "english":  "send",
                                                "value":  "/send/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0490",
+                                               "id":  "A1_W0502",
                                                "english":  "bed",
                                                "value":  "/bed/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0493",
+                                               "id":  "A1_W0505",
                                                "english":  "months",
                                                "value":  "/months/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0507",
+                                               "id":  "A1_W0519",
                                                "english":  "em",
                                                "value":  "/em/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0525",
+                                               "id":  "A1_W0537",
                                                "english":  "sighs",
                                                "value":  "/sighs/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0527",
-                                               "english":  "leaving",
-                                               "value":  "/leaving/",
+                                               "id":  "A1_W0541",
+                                               "english":  "alright",
+                                               "value":  "/alright/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0530",
+                                               "id":  "A1_W0542",
                                                "english":  "promise",
                                                "value":  "/promise/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0543",
+                                               "id":  "A1_W0555",
                                                "english":  "parents",
                                                "value":  "/parents/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0546",
+                                               "id":  "A1_W0558",
                                                "english":  "sounds",
                                                "value":  "/sounds/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0551",
+                                               "id":  "A1_W0563",
                                                "english":  "scared",
                                                "value":  "/scared/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0554",
+                                               "id":  "A1_W0566",
                                                "english":  "red",
                                                "value":  "/red/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0563",
+                                               "id":  "A1_W0575",
                                                "english":  "laughs",
                                                "value":  "/laughs/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0565",
+                                               "id":  "A1_W0576",
                                                "english":  "asking",
                                                "value":  "/asking/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0566",
+                                               "id":  "A1_W0577",
                                                "english":  "win",
                                                "value":  "/win/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0576",
+                                               "id":  "A1_W0587",
                                                "english":  "happens",
                                                "value":  "/happens/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0578",
+                                               "id":  "A1_W0589",
                                                "english":  "ten",
                                                "value":  "/ten/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0581",
+                                               "id":  "A1_W0592",
                                                "english":  "chuckles",
                                                "value":  "/chuckles/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0586",
+                                               "id":  "A1_W0597",
                                                "english":  "words",
                                                "value":  "/words/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0593",
+                                               "id":  "A1_W0604",
                                                "english":  "others",
                                                "value":  "/others/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0608",
+                                               "id":  "A1_W0619",
                                                "english":  "felt",
                                                "value":  "/felt/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0612",
+                                               "id":  "A1_W0623",
                                                "english":  "bet",
                                                "value":  "/bet/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0613",
-                                               "english":  "jesus",
-                                               "value":  "/jesus/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0616",
+                                               "id":  "A1_W0626",
                                                "english":  "worked",
                                                "value":  "/worked/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0618",
+                                               "id":  "A1_W0628",
                                                "english":  "looked",
                                                "value":  "/looked/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0626",
+                                               "id":  "A1_W0636",
                                                "english":  "weeks",
                                                "value":  "/weeks/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0628",
+                                               "id":  "A1_W0638",
                                                "english":  "seeing",
                                                "value":  "/seeing/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0633",
+                                               "id":  "A1_W0643",
                                                "english":  "takes",
                                                "value":  "/takes/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0636",
+                                               "id":  "A1_W0646",
                                                "english":  "loved",
                                                "value":  "/loved/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0637",
-                                               "english":  "changed",
-                                               "value":  "/changed/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0642",
+                                               "id":  "A1_W0651",
                                                "english":  "turned",
                                                "value":  "/turned/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0646",
+                                               "id":  "A1_W0655",
                                                "english":  "step",
                                                "value":  "/step/",
                                                "reason":  "IPA is just the English spelling"
                                            },
                                            {
-                                               "id":  "A1_0658",
+                                               "id":  "A1_W0667",
                                                "english":  "questions",
                                                "value":  "/questions/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0663",
-                                               "english":  "giving",
-                                               "value":  "/giving/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0674",
-                                               "english":  "ones",
-                                               "value":  "/ones/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0675",
-                                               "english":  "works",
-                                               "value":  "/works/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0677",
-                                               "english":  "needed",
-                                               "value":  "/needed/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0680",
-                                               "english":  "worried",
-                                               "value":  "/worried/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0682",
-                                               "english":  "goodbye",
-                                               "value":  "/goodbye/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0691",
-                                               "english":  "kidding",
-                                               "value":  "/kidding/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0715",
-                                               "english":  "watching",
-                                               "value":  "/watching/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0731",
-                                               "english":  "film",
-                                               "value":  "/film/",
-                                               "reason":  "IPA is just the English spelling"
-                                           },
-                                           {
-                                               "id":  "A1_0757",
-                                               "english":  "thinks",
-                                               "value":  "/thinks/",
                                                "reason":  "IPA is just the English spelling"
                                            }
                                        ],
                     "suspiciousIpa":  [
                                           {
-                                              "id":  "A1_0075",
+                                              "id":  "A1_W0077",
                                               "english":  "us",
                                               "value":  "/s,  s/",
                                               "reason":  "Malformed or spelling-like transcription"
                                           },
                                           {
-                                              "id":  "A1_2517",
+                                              "id":  "A1_W2523",
                                               "english":  "urgent",
                                               "value":  "/\u0027 :d  nt/",
                                               "reason":  "Malformed or spelling-like transcription"
                                           },
                                           {
-                                              "id":  "B1_1298",
+                                              "id":  "B1_W1152",
                                               "english":  "urgency",
                                               "value":  "/\u0027 :d  nsi/",
                                               "reason":  "Malformed or spelling-like transcription"
                                           },
                                           {
-                                              "id":  "B1_3611",
+                                              "id":  "B1_W3424",
                                               "english":  "untouchable",
                                               "value":  "/n\u0027t   bl/",
                                               "reason":  "Malformed or spelling-like transcription"
                                           },
                                           {
-                                              "id":  "B2_4799",
+                                              "id":  "B2_W4476",
                                               "english":  "withers",
                                               "value":  "/\u0027wi  z/",
                                               "reason":  "Malformed or spelling-like transcription"
                                           },
                                           {
-                                              "id":  "C1_1682",
+                                              "id":  "C1_W1265",
                                               "english":  "unreachable",
                                               "value":  "/\u0027 n\u0027ri:t  bl/",
                                               "reason":  "Malformed or spelling-like transcription"
                                           },
                                           {
-                                              "id":  "C1_2820",
+                                              "id":  "C1_W2356",
                                               "english":  "withering",
                                               "value":  "/\u0027wi  ri/",
                                               "reason":  "Malformed or spelling-like transcription"
                                           },
                                           {
-                                              "id":  "C1_3730",
+                                              "id":  "C1_W3230",
                                               "english":  "unwashed",
                                               "value":  "/\u0027 n\u0027w  t/",
+                                              "reason":  "Malformed or spelling-like transcription"
+                                          },
+                                          {
+                                              "id":  "C1_W4848",
+                                              "english":  "untangle",
+                                              "value":  "/\u0027 n\u0027t  gl/",
                                               "reason":  "Malformed or spelling-like transcription"
                                           }
                                       ],
                     "suspiciousTranslation":  [
                                                   {
-                                                      "id":  "A1_1266",
+                                                      "id":  "A1_W1283",
                                                       "english":  "consider",
                                                       "value":  "xem xét",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "A1_2169",
+                                                      "id":  "A1_W2179",
                                                       "english":  "considered",
                                                       "value":  "xem xét",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "A1_2647",
+                                                      "id":  "A1_W2498",
+                                                      "english":  "mac",
+                                                      "value":  "xem mackintosh",
+                                                      "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
+                                                  },
+                                                  {
+                                                      "id":  "A1_W2658",
                                                       "english":  "considering",
                                                       "value":  "xem xét",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "A2_0872",
+                                                      "id":  "A2_W0850",
                                                       "english":  "consideration",
                                                       "value":  "xem xét",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "A2_1725",
+                                                      "id":  "A2_W1198",
+                                                      "english":  "mack",
+                                                      "value":  "xem mackintosh",
+                                                      "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
+                                                  },
+                                                  {
+                                                      "id":  "A2_W1681",
                                                       "english":  "reconsider",
                                                       "value":  "xem xét lại",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "A2_4142",
+                                                      "id":  "A2_W1883",
+                                                      "english":  "com",
+                                                      "value":  "Trong DOS, đây là tên thiết bị được gán cho các cổng truyền thông nối tiếp có trong máy tính của bạn Máy bạn có thể có đến bốn cổng COM, theo DOS là COM 1, COM 2, COM 3, COM 4, Khi dùng làm đuôi mở rộng cho tên tệp COM sẽ cho biết đó là một tệp chương trình có thể thực hiện được, bị hạn chế trong giới hạn 64 K Để chạy một tệp COM, bạn đánh tên tệp và ấn Enter",
+                                                      "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
+                                                  },
+                                                  {
+                                                      "id":  "A2_W4034",
                                                       "english":  "preview",
                                                       "value":  "xem trước",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "B1_0856",
+                                                      "id":  "A2_W4910",
+                                                      "english":  "tung",
+                                                      "value":  "xem tung-tree",
+                                                      "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
+                                                  },
+                                                  {
+                                                      "id":  "B1_W0714",
                                                       "english":  "considers",
                                                       "value":  "xem xét",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "B1_1862",
+                                                      "id":  "B1_W1701",
                                                       "english":  "reviewing",
                                                       "value":  "xem xét",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "B2_0665",
+                                                      "id":  "B2_W0426",
                                                       "english":  "revisit",
                                                       "value":  "xem lại",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "C1_0502",
+                                                      "id":  "B2_W1574",
+                                                      "english":  "daimon",
+                                                      "value":  "xem demon",
+                                                      "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
+                                                  },
+                                                  {
+                                                      "id":  "C1_W0156",
                                                       "english":  "reconsidered",
                                                       "value":  "xem xét lại",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   },
                                                   {
-                                                      "id":  "C1_1002",
+                                                      "id":  "C1_W0622",
                                                       "english":  "revue",
                                                       "value":  "xem lại",
+                                                      "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
+                                                  },
+                                                  {
+                                                      "id":  "C1_W2176",
+                                                      "english":  "seneca",
+                                                      "value":  "xem senega, tiếng Xeneca",
+                                                      "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
+                                                  },
+                                                  {
+                                                      "id":  "C1_W2542",
+                                                      "english":  "ema",
+                                                      "value":  "Xem EUROPEAN MONETARY AGREEMENT",
+                                                      "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
+                                                  },
+                                                  {
+                                                      "id":  "C1_W2990",
+                                                      "english":  "mimosa",
+                                                      "value":  "cây xấu hổ, cây trinh n",
+                                                      "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
+                                                  },
+                                                  {
+                                                      "id":  "C1_W3818",
+                                                      "english":  "ns",
+                                                      "value":  "n, n",
                                                       "reason":  "Dictionary artifact, obsolete notation, or excessively broad gloss"
                                                   }
                                               ]

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dictalearn-v14';
+const CACHE_NAME = 'dictalearn-v16';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -11,6 +11,8 @@ const ASSETS_TO_CACHE = [
   './js/audio.js',
   './js/diff.js',
   './js/srs.js',
+  './js/speaking.js',
+  './js/study_plan.js',
   './js/shortcuts.js',
   './data/index.json',
   './data/data_A1.json',
