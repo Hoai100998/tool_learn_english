@@ -191,6 +191,9 @@ class SRSManager {
   }
 
   addToReviewQueue(itemId) {
+    // A hint can schedule an item before its first scored attempt. Ensure the
+    // corresponding SRS record exists so getDueReviewIds() can return it.
+    this.getItemRecord(itemId);
     if (!this.data.reviewQueue.includes(itemId)) {
       this.data.reviewQueue.push(itemId);
     }

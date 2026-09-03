@@ -16,6 +16,7 @@ class DictaLearnApp {
     this.activeList = [];
     this.currentIndex = 0;
     this.currentItem = null;
+    this.sessionRepeatCounts = new Map();
 
     this.isResultsVisible = false;
     this.lastAttemptItemId = null;
@@ -385,9 +386,26 @@ class DictaLearnApp {
       this.activeList = [...pool];
     }
 
+    // A new filter/level starts a fresh practice session. Each studied item can
+    // reappear twice in that session, while SRS continues handling later days.
+    this.sessionRepeatCounts.clear();
     this.currentIndex = 0;
     this.updateStatsDisplay();
     this.loadItem(this.currentIndex);
+  }
+
+  scheduleSessionRepeat(item, accuracy) {
+    if (!item || this.currentTab === 'review' || !this.activeList.length) return;
+
+    const repeatCount = this.sessionRepeatCounts.get(item.id) || 0;
+    if (repeatCount >= 2) return;
+
+    // Difficult answers return sooner. Correct answers use expanding gaps so
+    // recall is practised instead of merely repeating the item immediately.
+    const gaps = accuracy < 80 ? [2, 6] : [5, 12];
+    const insertAt = Math.min(this.currentIndex + gaps[repeatCount], this.activeList.length);
+    this.activeList.splice(insertAt, 0, item);
+    this.sessionRepeatCounts.set(item.id, repeatCount + 1);
   }
 
   updateModeAvailability(pool) {
@@ -724,6 +742,7 @@ class DictaLearnApp {
 
     // Record SRS Mastered & Study Plan Progress
     this.srs.recordAttempt(this.currentItem.id, 100);
+    this.scheduleSessionRepeat(this.currentItem, 100);
     this.renderLevelPills();
     this.studyPlan?.recordTypingAttempt(this.currentItem, true);
     this.updateStatsDisplay();
@@ -806,6 +825,7 @@ class DictaLearnApp {
 
     // Save SRS record
     this.srs.recordAttempt(this.currentItem.id, diff.accuracy);
+    this.scheduleSessionRepeat(this.currentItem, diff.accuracy);
     this.renderLevelPills();
     this.updateStatsDisplay();
 
