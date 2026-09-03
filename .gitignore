@@ -1,6 +1,7 @@
 # Personal learning progress and local test artifacts
 dictalearn_progress.json
 edge-test-*.png
+.audio-debug-chrome/
 
 # Local secrets and generated caches
 .env

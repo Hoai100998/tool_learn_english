@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dictalearn-v16';
+const CACHE_NAME = 'dictalearn-v17';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

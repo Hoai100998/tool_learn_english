@@ -1,8 +1,8 @@
 /**
  * DictaLearn - High-Definition Audio Engine
  * Features:
- * 1. Studio-grade Natural Neural Voice Selection (Google US/UK, Microsoft Jenny/Guy/Aria Online)
- * 2. High-Fidelity Online TTS Audio Streaming with Oxford/Cambridge & Google Neural fallback
+ * 1. Natural voice selection from the browser / operating system
+ * 2. Explicit audio URL playback with browser speech fallback
  * 3. Precision rate (0.5x - 1.2x) and crisp phonetic articulation
  */
 
@@ -17,6 +17,7 @@ class AudioController {
     this.isPlaying = false;
     this.currentText = '';
     this.currentAudioUrl = null;
+    this.currentUtterance = null;
     this.preferredVoiceName = null;
 
     this.onStateChangeCallbacks = [];
@@ -161,7 +162,9 @@ class AudioController {
 
   /**
    * Play target item with maximum phonetic clarity
-   * Multi-tier: 1) Explicit item MP3 -> 2) Crystal-Clear Online TTS -> 3) Neural Web Speech
+   * Prefer an explicit recording when present; otherwise use the browser's
+   * speech engine. Public Google Translate TTS URLs are intentionally avoided:
+   * Chrome may reject them with MEDIA_ERR_SRC_NOT_SUPPORTED / ORB blocking.
    */
   playItem(item) {
     if (!item || !item.english) return;
@@ -169,27 +172,13 @@ class AudioController {
     this.stop();
     this.currentText = item.english.trim();
 
-    // 1. If explicit audio URL exists (Oxford/Cambridge studio recording)
+    // 1. Use an explicit recording when the dataset provides one.
     if (item.audioUrl && item.audioUrl.startsWith('http')) {
       this.playUrl(item.audioUrl);
       return;
     }
 
-    // 2. For single words and short phrases: Stream HD Google Neural Pronunciation
-    const cleanQuery = this.currentText.replace(/[/\\#,+()$~%.'":*?<>{}]/g, '');
-    const isShortText = cleanQuery.split(/\s+/).length <= 15;
-    
-    if (isShortText) {
-      const langCode = this.voiceLang.startsWith('en-GB') ? 'en-gb' : 'en-us';
-      const hdAudioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${langCode}&q=${encodeURIComponent(cleanQuery)}`;
-      this.playUrl(hdAudioUrl, () => {
-        // Fallback to SpeechSynthesis on stream blockage
-        this.speakWithSpeechSynthesis(this.currentText);
-      });
-      return;
-    }
-
-    // 3. For longer sentences: Use High-Definition SpeechSynthesis
+    // 2. Use a locally available or browser-provided English voice.
     this.speakWithSpeechSynthesis(this.currentText);
   }
 
@@ -227,9 +216,19 @@ class AudioController {
     utterance.volume = 1.0;
 
     utterance.onstart = () => this.notifyState(true);
-    utterance.onend = () => this.notifyState(false);
-    utterance.onerror = () => this.notifyState(false);
+    utterance.onerror = () => {
+      this.currentUtterance = null;
+      this.notifyState(false);
+    };
+    utterance.onend = () => {
+      this.currentUtterance = null;
+      this.notifyState(false);
+    };
 
+    // Retain the utterance until completion. Some Chromium versions may
+    // garbage-collect an utterance that only exists as a local variable.
+    this.currentUtterance = utterance;
+    this.speechSynth.resume();
     this.speechSynth.speak(utterance);
   }
 
@@ -246,9 +245,10 @@ class AudioController {
       this.audioElement.pause();
       this.audioElement.currentTime = 0;
     }
-    if (this.speechSynth && this.speechSynth.speaking) {
+    if (this.speechSynth) {
       this.speechSynth.cancel();
     }
+    this.currentUtterance = null;
     this.notifyState(false);
   }
 }
