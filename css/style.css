@@ -308,6 +308,57 @@ input:focus-visible {
   border: 1px solid rgba(244, 63, 94, 0.35);
 }
 
+.level-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 42px;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: rgba(139, 92, 246, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.level-pill:hover {
+  border-color: var(--primary);
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.level-pill.active {
+  color: #fff;
+  border-color: transparent;
+  background: var(--grad-vivid);
+  box-shadow: var(--shadow-vivid);
+}
+
+.level-pill-code {
+  font-size: 0.84rem;
+  font-family: var(--font-mono);
+}
+
+.level-progress {
+  display: grid;
+  gap: 0.05rem;
+  font-size: 0.62rem;
+  line-height: 1.3;
+  text-align: left;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}
+
+.level-progress b {
+  display: inline-block;
+  min-width: 2.7em;
+  color: var(--text-muted);
+}
+
+.level-pill.active .level-progress b {
+  color: rgba(255, 255, 255, 0.75);
+}
+
 /* Header Actions */
 .header-actions {
   display: flex;
@@ -1984,7 +2035,7 @@ input:focus-visible {
   .filter-left-group { align-items: flex-start; gap: 0.45rem; }
   .filter-label { width: 100%; margin-left: 0 !important; }
   .pill-group { width: 100%; }
-  .pill-btn, .mode-pill { flex: 1 1 auto; text-align: center; }
+  .level-pill, .pill-btn, .mode-pill { flex: 1 1 auto; text-align: center; }
   .voice-select-wrap { width: 100%; margin-top: 0.25rem; }
   .voice-select-wrap select { flex: 1; max-width: none; min-width: 0; }
   .daily-mission-strip { gap: 0.45rem; }

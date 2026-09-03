@@ -227,10 +227,16 @@ class DictaLearnApp {
     if (!this.catalog || !this.levelPillsContainer) return;
 
     this.levelPillsContainer.innerHTML = this.catalog.levels.map(lvl => {
-      const count = (this.datasets[lvl.code] || []).length || lvl.total || 5000;
+      const progress = this.getLevelProgress(lvl);
       return `
-        <button class="level-pill ${lvl.code === this.currentLevel ? 'active' : ''}" data-level="${lvl.code}">
-          ${lvl.code} <span class="badge-count">${count.toLocaleString()} từ</span>
+        <button class="level-pill ${lvl.code === this.currentLevel ? 'active' : ''}" data-level="${lvl.code}"
+          aria-label="Cấp độ ${lvl.code}: ${progress.word.learned}/${progress.word.total} từ, ${progress.phrase.learned}/${progress.phrase.total} cụm từ, ${progress.sentence.learned}/${progress.sentence.total} câu đã học">
+          <strong class="level-pill-code">${lvl.code}</strong>
+          <span class="level-progress" title="Số đã học / tổng số">
+            <span><b>Từ</b> ${progress.word.learned.toLocaleString('vi-VN')}/${progress.word.total.toLocaleString('vi-VN')}</span>
+            <span><b>Cụm</b> ${progress.phrase.learned.toLocaleString('vi-VN')}/${progress.phrase.total.toLocaleString('vi-VN')}</span>
+            <span><b>Câu</b> ${progress.sentence.learned.toLocaleString('vi-VN')}/${progress.sentence.total.toLocaleString('vi-VN')}</span>
+          </span>
         </button>
       `;
     }).join('');
@@ -242,10 +248,52 @@ class DictaLearnApp {
         btn.classList.add('active');
 
         await this.loadLevelData(this.currentLevel);
+        this.renderLevelPills();
 
         this.applyFilter();
       });
     });
+  }
+
+  getLevelProgress(level) {
+    const typeNames = ['word', 'phrase', 'sentence'];
+    const loadedItems = this.datasets[level.code] || [];
+    const loadedTotals = typeNames.reduce((totals, type) => {
+      totals[type] = loadedItems.filter(item => item.type === type).length;
+      return totals;
+    }, {});
+    const catalogTotals = level.types || {};
+    const totals = typeNames.reduce((result, type) => {
+      result[type] = loadedItems.length
+        ? loadedTotals[type]
+        : (catalogTotals[type] || 0);
+      return result;
+    }, {});
+    const learned = typeNames.reduce((result, type) => {
+      result[type] = 0;
+      return result;
+    }, {});
+
+    const loadedItemDetails = new Map();
+    Object.values(this.datasets).forEach(items => {
+      (items || []).forEach(item => loadedItemDetails.set(String(item.id), item));
+    });
+
+    Object.values(this.srs.data.items).forEach(record => {
+      if (!record || record.totalAttempts < 1) return;
+      const id = String(record.id || '');
+      const item = loadedItemDetails.get(id);
+      const match = id.match(/^(A1|A2|B1|B2|C1)_(W|P|S)/);
+      const itemLevel = item?.level || match?.[1];
+      if (itemLevel !== level.code) return;
+      const type = item?.type || { W: 'word', P: 'phrase', S: 'sentence' }[match?.[2]];
+      if (type) learned[type]++;
+    });
+
+    return typeNames.reduce((progress, type) => {
+      progress[type] = { learned: learned[type], total: totals[type] };
+      return progress;
+    }, {});
   }
 
   async loadLevelData(level) {
@@ -676,6 +724,7 @@ class DictaLearnApp {
 
     // Record SRS Mastered & Study Plan Progress
     this.srs.recordAttempt(this.currentItem.id, 100);
+    this.renderLevelPills();
     this.studyPlan?.recordTypingAttempt(this.currentItem, true);
     this.updateStatsDisplay();
 
@@ -757,6 +806,7 @@ class DictaLearnApp {
 
     // Save SRS record
     this.srs.recordAttempt(this.currentItem.id, diff.accuracy);
+    this.renderLevelPills();
     this.updateStatsDisplay();
 
     // Scroll to results if needed
@@ -1106,6 +1156,7 @@ class DictaLearnApp {
         }
         if (ok) {
           alert('Khôi phục tiến trình học thành công!');
+          this.renderLevelPills();
           this.updateStatsDisplay();
           this.applyFilter();
           this.closeAllModals();
@@ -1119,6 +1170,7 @@ class DictaLearnApp {
     this.btnResetData?.addEventListener('click', () => {
       if (confirm('Bạn có chắc chắn muốn đặt lại toàn bộ tiến độ học tập và chuỗi ngày không?')) {
         this.srs.resetAllData();
+        this.renderLevelPills();
         this.updateStatsDisplay();
         this.applyFilter();
         this.closeAllModals();
