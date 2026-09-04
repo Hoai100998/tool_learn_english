@@ -255,6 +255,8 @@ class StudyPlanManager {
     const dayTitleEl = document.getElementById('dailyMissionDayTitle');
     const phaseLabel = document.getElementById('dailyPhaseLabel');
     const completeButton = document.getElementById('btnCompleteDay');
+    const saveTitle = document.getElementById('progressSaveTitle');
+    const saveStatus = document.getElementById('progressSaveStatus');
     const phase = this.getLearningPhase();
     const targets = this.getAdaptiveTargets(currentDayObj, phase.id);
 
@@ -289,11 +291,19 @@ class StudyPlanManager {
     const completedToday = this.state.lastCompletedDate === this.state.todayProgress.date;
     if (completeButton) {
       completeButton.disabled = false;
-      completeButton.textContent = completedToday
-        ? '💾 Cập nhật lại file tiến độ hôm nay'
+      completeButton.classList.toggle('is-complete', completedToday || percent >= 100);
+    }
+    if (saveTitle) {
+      saveTitle.textContent = completedToday
+        ? 'Cập nhật bản sao lưu'
         : percent >= 100
-          ? '✅ Hoàn thành ngày & lưu file tiến độ'
-          : `💾 Lưu vào file tiến độ (${percent}%)`;
+          ? 'Hoàn thành & lưu tiến độ'
+          : 'Lưu tiến độ học';
+    }
+    if (saveStatus) {
+      saveStatus.textContent = completedToday
+        ? `Đã lưu hôm nay • ${percent}%`
+        : `Sao lưu vào máy • ${percent}%`;
     }
   }
 

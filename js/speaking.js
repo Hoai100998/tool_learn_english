@@ -305,6 +305,14 @@ class SpeakingController {
 
     this.renderPronunciationResult(score, wordBreakdown, spokenText, targetText);
 
+    // Speaking practice is learning too: keep the item in the same review
+    // library and let its pronunciation score influence the SRS schedule.
+    if (this.app.srs) {
+      this.app.srs.recordAttempt(currentItem.id, score);
+      this.app.renderLevelPills?.();
+      this.app.updateStatsDisplay?.();
+    }
+
     // Notify app study plan manager
     if (this.app.studyPlan) {
       this.app.studyPlan.recordSpeakingAttempt(score);

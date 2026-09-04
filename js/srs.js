@@ -116,9 +116,9 @@ class SRSManager {
         item.mastered = true;
       }
 
-      // Keep non-mastered material scheduled; mastered material leaves the queue.
-      if (item.mastered) this.removeFromReviewQueue(itemId);
-      else this.addToReviewQueue(itemId);
+      // Keep every learned item scheduled. Mastered material returns less
+      // often through its longer SM-2 interval instead of disappearing.
+      this.addToReviewQueue(itemId);
     } else {
       // Incorrect response -> Reset repetition cycle
       item.repetitions = 0;
@@ -173,6 +173,48 @@ class SRSManager {
       const item = this.data.items[id];
       return item && (!item.nextReviewDate || new Date(item.nextReviewDate) <= now);
     });
+  }
+
+  /** Every item completed at least once, including mastered material. */
+  getLearnedItemIds() {
+    return Object.values(this.data.items)
+      .filter(item => item && Number(item.totalAttempts) > 0)
+      .map(item => item.id);
+  }
+
+  /** Complete review library ordered by forgetting risk. */
+  getReviewLibraryIds(now = new Date()) {
+    const nowTime = now.getTime();
+    const riskScore = item => {
+      const dueTime = item.nextReviewDate ? new Date(item.nextReviewDate).getTime() : 0;
+      const isDue = !Number.isFinite(dueTime) || dueTime <= nowTime;
+      const overdueDays = isDue && dueTime > 0
+        ? Math.min(365, Math.floor((nowTime - dueTime) / 86400000))
+        : 0;
+      return (isDue ? 100000 : 0)
+        + overdueDays * 100
+        + (item.mistakeCount || 0) * 40
+        + Math.max(0, 4 - (item.repetitions || 0)) * 20
+        + (item.mastered ? -500 : 0);
+    };
+
+    return Object.values(this.data.items)
+      .filter(item => item && Number(item.totalAttempts) > 0)
+      .sort((a, b) => riskScore(b) - riskScore(a)
+        || new Date(a.lastReviewed || 0) - new Date(b.lastReviewed || 0))
+      .map(item => item.id);
+  }
+
+  getReviewLibrarySummary(now = new Date()) {
+    const learned = Object.values(this.data.items)
+      .filter(item => item && Number(item.totalAttempts) > 0);
+    const dueSet = new Set(this.getDueReviewIds(now));
+    return {
+      learned: learned.length,
+      due: learned.filter(item => dueSet.has(item.id)).length,
+      learning: learned.filter(item => !item.mastered).length,
+      mastered: learned.filter(item => item.mastered).length
+    };
   }
 
   setMeaningOverride(itemId, meaning) {
@@ -264,6 +306,8 @@ class SRSManager {
       currentStreak: this.data.stats.currentStreak || 0,
       masteredCount,
       reviewQueueCount: this.getDueReviewIds().length,
+      reviewLibraryCount: Object.values(this.data.items)
+        .filter(it => it && Number(it.totalAttempts) > 0).length,
       totalMistakes: mistakeCount
     };
   }
@@ -312,9 +356,15 @@ class SRSManager {
         if (!Number.isFinite(items[id][key]) || items[id][key] < 0) return null;
       }
     }
-    const reviewQueue = Array.isArray(parsed.reviewQueue)
-      ? [...new Set(parsed.reviewQueue.filter(id => typeof id === 'string' && items[id]))]
+    // Migration: older versions removed mastered items from reviewQueue.
+    // Rebuild it from every genuinely learned record so nothing is forgotten.
+    const previousQueue = Array.isArray(parsed.reviewQueue)
+      ? parsed.reviewQueue.filter(id => typeof id === 'string' && items[id])
       : [];
+    const learnedIds = Object.values(items)
+      .filter(item => Number(item.totalAttempts) > 0)
+      .map(item => item.id);
+    const reviewQueue = [...new Set([...previousQueue, ...learnedIds])];
     const meaningOverrides = {};
     if (parsed.meaningOverrides && typeof parsed.meaningOverrides === 'object' && !Array.isArray(parsed.meaningOverrides)) {
       for (const [id, meaning] of Object.entries(parsed.meaningOverrides)) {

@@ -21,6 +21,7 @@ class DictaLearnApp {
     this.isResultsVisible = false;
     this.lastAttemptItemId = null;
     this.audioAutoPlay = true;
+    this.lastFeedbackTitle = '';
 
     // Submodules
     this.audio = new AudioController();
@@ -70,6 +71,11 @@ class DictaLearnApp {
     this.tagType = document.getElementById('tagType');
     this.btnShuffleToggle = document.getElementById('btnShuffleToggle');
     this.progressIndicator = document.getElementById('progressIndicator');
+    this.reviewOverview = document.getElementById('reviewOverview');
+    this.reviewLearnedCount = document.getElementById('reviewLearnedCount');
+    this.reviewDueCount = document.getElementById('reviewDueCount');
+    this.reviewLearningCount = document.getElementById('reviewLearningCount');
+    this.reviewMasteredCount = document.getElementById('reviewMasteredCount');
 
     // Speaking Mode Box Elements
     this.speakingPracticeBox = document.getElementById('speakingPracticeBox');
@@ -129,12 +135,6 @@ class DictaLearnApp {
     this.customViInputInstant = document.getElementById('customViInputInstant');
     this.inlineViEditFormInstant = document.getElementById('inlineViEditFormInstant');
 
-    this.btnEditViResult = document.getElementById('btnEditViResult');
-    this.btnSaveViResult = document.getElementById('btnSaveViResult');
-    this.btnCancelViResult = document.getElementById('btnCancelViResult');
-    this.customViInputResult = document.getElementById('customViInputResult');
-    this.inlineViEditFormResult = document.getElementById('inlineViEditFormResult');
-
     // Results & SRS Panel
     this.resultsPanel = document.getElementById('resultsPanel');
     this.accuracyCircle = document.getElementById('accuracyCircle');
@@ -142,11 +142,6 @@ class DictaLearnApp {
     this.feedbackTitle = document.getElementById('feedbackTitle');
     this.feedbackDesc = document.getElementById('feedbackDesc');
     this.diffTokensStream = document.getElementById('diffTokensStream');
-    this.targetContextCard = document.getElementById('targetContextCard');
-    this.originalTextEl = document.getElementById('originalText');
-    this.ipaBadgeEl = document.getElementById('ipaBadge');
-    this.vietnameseTextEl = document.getElementById('vietnameseText');
-    this.exampleBoxEl = document.getElementById('exampleBox');
     this.btnNextAfterResult = document.getElementById('btnNextAfterResult');
 
     // Modals
@@ -191,12 +186,18 @@ class DictaLearnApp {
 
   setupAudioListeners() {
     this.audio.onStateChange((isPlaying) => {
+      if (this.btnPlayHero) {
+        this.btnPlayHero.classList.toggle('is-playing', isPlaying);
+        this.btnPlayHero.setAttribute('aria-pressed', String(isPlaying));
+        this.btnPlayHero.setAttribute('aria-label', isPlaying ? 'Dừng phát âm thanh' : 'Phát âm thanh');
+        this.btnPlayHero.title = isPlaying
+          ? 'Dừng phát âm thanh (Phím Space)'
+          : 'Phát âm thanh (Phím Space)';
+      }
       if (isPlaying) {
         this.audioVisualBox.classList.add('playing');
-        this.btnPlayHero.classList.add('is-playing');
       } else {
         this.audioVisualBox.classList.remove('playing');
-        this.btnPlayHero.classList.remove('is-playing');
       }
     });
   }
@@ -363,10 +364,13 @@ class DictaLearnApp {
     let pool = [];
 
     if (this.currentTab === 'review') {
-      // Collect items present in Review Queue across all levels or selected level
-      const queueIds = this.srs.getDueReviewIds();
-      const allItems = Object.values(this.datasets).flat();
-      pool = allItems.filter(item => queueIds.includes(item.id));
+      // The review tab is a permanent library of everything studied across
+      // A1-C1. SRS risk order puts due and difficult material first.
+      const reviewIds = this.srs.getReviewLibraryIds();
+      const itemById = new Map(
+        Object.values(this.datasets).flat().map(item => [String(item.id), item])
+      );
+      pool = reviewIds.map(id => itemById.get(String(id))).filter(Boolean);
     } else {
       // Standard Level Dataset
       pool = this.datasets[this.currentLevel] || [];
@@ -554,11 +558,7 @@ class DictaLearnApp {
       if (this.permanentIpaTag && item.ipa) this.permanentIpaTag.textContent = item.ipa;
       if (this.instantVietnamese) this.instantVietnamese.textContent = viDisplay;
       if (this.instantIPA && item.ipa) this.instantIPA.textContent = item.ipa;
-      if (this.vietnameseTextEl) this.vietnameseTextEl.textContent = viDisplay;
       if (this.speakingTargetVi) this.speakingTargetVi.textContent = viDisplay;
-      if (this.ipaBadgeEl) {
-        this.ipaBadgeEl.textContent = [item.ipa, this.getPartOfSpeechLabel(item)].filter(Boolean).join(' • ');
-      }
       if (this.instantCategory) this.instantCategory.textContent = this.getPartOfSpeechLabel(item);
     }
   }
@@ -587,7 +587,6 @@ class DictaLearnApp {
     // 4. Update UI displays
     this.updateTranslationCardIfVisible(this.currentItem);
     if (this.speakingTargetVi) this.speakingTargetVi.textContent = cleanMeaning;
-    if (this.vietnameseTextEl) this.vietnameseTextEl.textContent = cleanMeaning;
     if (this.instantVietnamese) this.instantVietnamese.textContent = cleanMeaning;
     if (this.permanentMeaningText) this.permanentMeaningText.textContent = cleanMeaning;
 
@@ -599,7 +598,7 @@ class DictaLearnApp {
   }
 
   closeAllViEditForms() {
-    [this.inlineViEditFormPermanent, this.inlineViEditFormSpeaking, this.inlineViEditFormInstant, this.inlineViEditFormResult].forEach(form => {
+    [this.inlineViEditFormPermanent, this.inlineViEditFormSpeaking, this.inlineViEditFormInstant].forEach(form => {
       if (form) form.style.display = 'none';
     });
   }
@@ -727,7 +726,19 @@ class DictaLearnApp {
         label.textContent = 'Ví dụ: ';
         const example = document.createElement('em');
         example.textContent = this.currentItem.example;
-        this.instantExample.append(label, example, document.createTextNode(` — ${this.currentItem.example_vi || ''}`));
+        const exampleLine = document.createElement('div');
+        exampleLine.className = 'example-english-line';
+        exampleLine.append(label, example);
+
+        const translationLine = document.createElement('div');
+        translationLine.className = 'example-vietnamese-line';
+        const translationLabel = document.createElement('strong');
+        translationLabel.textContent = 'Nghĩa tiếng Việt: ';
+        translationLine.append(translationLabel, document.createTextNode(
+          this.getExampleVietnamese(this.currentItem)
+        ));
+
+        this.instantExample.append(exampleLine, translationLine);
       } else if (this.instantExample) {
         this.instantExample.style.display = 'none';
       }
@@ -739,6 +750,7 @@ class DictaLearnApp {
     this.renderDiffResult(diff, this.currentItem);
     this.isResultsVisible = true;
     this.resultsPanel.classList.add('visible');
+    this.setResultActionState(true);
 
     // Record SRS Mastered & Study Plan Progress
     this.srs.recordAttempt(this.currentItem.id, 100);
@@ -757,7 +769,12 @@ class DictaLearnApp {
     this.tagLevel.textContent = this.currentLevel;
     this.tagType.textContent = 'Trống';
     this.progressIndicator.textContent = '0 / 0';
-    if (this.wordSlotsBoard) this.wordSlotsBoard.innerHTML = '<span style="color: var(--text-muted); font-size: 0.9rem;">Chưa có dữ liệu bài học</span>';
+    if (this.wordSlotsBoard) {
+      const message = this.currentTab === 'review'
+        ? 'Kho ôn tập đang trống. Hãy hoàn thành một bài ở Luyện gõ hoặc Luyện nói trước.'
+        : 'Chưa có dữ liệu bài học';
+      this.wordSlotsBoard.innerHTML = `<span class="empty-review-message">${message}</span>`;
+    }
     if (this.slotsMatchCount) this.slotsMatchCount.textContent = '0 / 0 từ';
     if (this.instantTranslationCard) this.instantTranslationCard.style.display = 'none';
     this.dictationInput.value = '';
@@ -822,6 +839,7 @@ class DictaLearnApp {
     this.renderDiffResult(diff, this.currentItem);
     this.isResultsVisible = true;
     this.resultsPanel.classList.add('visible');
+    this.setResultActionState(true);
 
     // Save SRS record
     this.srs.recordAttempt(this.currentItem.id, diff.accuracy);
@@ -839,19 +857,10 @@ class DictaLearnApp {
     this.accuracyCircle.textContent = `${diff.accuracy}%`;
     this.accuracyCircle.className = 'accuracy-circle';
     
-    if (diff.accuracy >= 90) {
-      this.accuracyCircle.classList.add('accuracy-high');
-      this.feedbackTitle.textContent = '🎉 Xuất sắc! Gần như hoàn hảo!';
-      this.feedbackDesc.textContent = 'Bạn đã nghe và chép chính xác nội dung.';
-    } else if (diff.accuracy >= 60) {
-      this.accuracyCircle.classList.add('accuracy-mid');
-      this.feedbackTitle.textContent = '👍 Khá tốt! Hãy chú ý các từ sai!';
-      this.feedbackDesc.textContent = 'Một số từ hoặc ký tự chưa chính xác, hãy xem so sánh bên dưới.';
-    } else {
-      this.accuracyCircle.classList.add('accuracy-low');
-      this.feedbackTitle.textContent = '💪 Cần cố gắng hơn nữa!';
-      this.feedbackDesc.textContent = 'Câu này đã được tự động thêm vào danh sách Ôn tập.';
-    }
+    const feedback = this.getFriendlyFeedback(diff.accuracy);
+    this.accuracyCircle.classList.add(feedback.accuracyClass);
+    this.feedbackTitle.textContent = feedback.title;
+    this.feedbackDesc.textContent = feedback.description;
 
     // 2. Token Stream Highlighting
     this.diffTokensStream.innerHTML = diff.tokens.map(tok => {
@@ -872,34 +881,109 @@ class DictaLearnApp {
       return '';
     }).join(' ');
 
-    // 3. Target & Context Card (IPA, Translation, Example)
-    this.originalTextEl.textContent = item.english;
-    const posLabel = this.getPartOfSpeechLabel(item);
-    this.ipaBadgeEl.textContent = [item.ipa, posLabel].filter(Boolean).join(' • ');
-    this.vietnameseTextEl.textContent = item.vietnamese || '';
-    
-    if (item.example && item.example !== item.english) {
-      this.exampleBoxEl.style.display = 'block';
-      this.exampleBoxEl.replaceChildren();
-      const exampleLine = document.createElement('div');
-      const label = document.createElement('strong');
-      label.textContent = 'Ví dụ: ';
-      const example = document.createElement('em');
-      example.textContent = item.example;
-      exampleLine.append(label, example);
-      const translation = document.createElement('div');
-      translation.style.cssText = 'font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;';
-      translation.textContent = item.example_vi || '';
-      this.exampleBoxEl.append(exampleLine, translation);
-    } else {
-      this.exampleBoxEl.style.display = 'none';
-    }
+  }
+
+  getFriendlyFeedback(accuracy) {
+    const messages = {
+      high: [
+        '🎉 Tuyệt vời! Tai nghe hôm nay bắt sóng cực chuẩn!',
+        '🌟 Chính xác như một chiếc đồng hồ tốt!',
+        '🚀 Câu trả lời vừa bay thẳng tới đích!',
+        '🏆 Một màn chép chính tả rất đáng tự hào!',
+        '🎯 Trúng đích rồi! Không lệch một nhịp!',
+        '🧠 Bộ não vừa bật đèn xanh: Nhớ rất tốt!',
+        '👏 Bàn phím cũng muốn vỗ tay cho bạn!',
+        '✨ Đẹp như một dòng chữ vừa được đánh bóng!',
+        '🐰 Tai thính như thỏ, gõ chữ nhanh như gió!',
+        '🥇 Huy chương chăm học hôm nay thuộc về bạn!',
+        '🎵 Bạn đã bắt đúng từng nhịp của câu!',
+        '💡 Nghe rõ, nhớ nhanh, trả lời thật hay!',
+        '🌈 Kết quả sáng rực như cầu vồng sau mưa!',
+        '🛸 Phi thuyền từ vựng đã hạ cánh an toàn!',
+        '📚 Một câu nữa đã ngoan ngoãn vào trí nhớ!',
+        '🦉 Cú mèo thông thái cũng gật đầu khen bạn!',
+        '🍀 Chính xác và bình tĩnh — tuyệt lắm!',
+        '🎊 Hoàn thành gọn gàng như một nhà vô địch!',
+        '⭐ Ngôi sao tiếng Anh vừa sáng thêm một bậc!',
+        '😄 Quá ổn! Câu này không làm khó được bạn!'
+      ],
+      mid: [
+        '👍 Khá lắm! Chỉ còn vài chữ đang chơi trốn tìm!',
+        '🧩 Gần ghép xong rồi, thêm một chút nữa nhé!',
+        '🎯 Đã gần trúng tâm! Mình chỉnh nhẹ lần sau nhé!',
+        '🐢 Chậm mà chắc, trí nhớ đang lớn lên từng chút!',
+        '💪 Nền móng rất tốt, sửa vài chỗ là đẹp ngay!',
+        '🔍 Thám tử từ vựng đã tìm đúng phần lớn manh mối!',
+        '🌱 Tiến bộ đang nảy mầm, tiếp tục chăm sóc nhé!',
+        '🚲 Bạn đang đạp rất đều, sắp tới đích rồi!',
+        '🎵 Đúng gần hết giai điệu, còn vài nốt nhỏ thôi!',
+        '🧠 Bộ não đã nhớ phần lớn — ôn thêm là chắc!',
+        '📖 Câu này gần thuộc về bạn rồi đấy!',
+        '✨ Khá tốt! Chỉnh vài chữ là sáng bóng ngay!',
+        '🦊 Khéo lắm! Hãy xem lại vài dấu chân còn thiếu!',
+        '🌤️ Bầu trời đã sáng, chỉ còn vài đám mây nhỏ!',
+        '🏃 Đà học rất tốt, giữ nhịp thêm một vòng nhé!'
+      ],
+      low: [
+        '🌱 Không sao, mỗi lần thử là một lần tiến bộ!',
+        '🧩 Câu này hơi tinh nghịch, mình ghép lại nhé!',
+        '💪 Chưa đúng lần này, nhưng trí nhớ đang tập thể dục!',
+        '🐣 Ai cũng bắt đầu từ những bước nhỏ như thế này!',
+        '🔁 Thử lại một vòng, câu này sẽ quen mặt ngay!',
+        '🧠 Bộ não đang tải dữ liệu — cho bạn ấy thêm chút thời gian!',
+        '🌦️ Có chút mây thôi, luyện thêm là trời sáng ngay!',
+        '🚶 Đi từng bước nhé, không cần phải vội!',
+        '📚 Câu khó chính là cơ hội để nhớ lâu hơn!',
+        '🎯 Chưa trúng đích, nhưng bạn đã ngắm đúng hướng!',
+        '🐢 Chậm một chút vẫn tốt, miễn là mình tiếp tục!',
+        '🛠️ Mỗi lỗi nhỏ là một chiếc cầu giúp mình học tốt hơn!',
+        '🍀 Cố thêm một lần nữa, may mắn đi cùng chăm chỉ!',
+        '🔍 Mình xem lại manh mối rồi thử tiếp nhé!',
+        '😊 Bạn đã dám thử — đó đã là một bước tiến rồi!'
+      ]
+    };
+
+    const tier = accuracy >= 90 ? 'high' : accuracy >= 60 ? 'mid' : 'low';
+    const choices = messages[tier].filter(title => title !== this.lastFeedbackTitle);
+    const title = choices[Math.floor(Math.random() * choices.length)] || messages[tier][0];
+    this.lastFeedbackTitle = title;
+    return {
+      title,
+      accuracyClass: `accuracy-${tier}`,
+      description: tier === 'high'
+        ? 'Bạn đã nghe và chép rất chính xác. Hãy giữ vững phong độ!'
+        : tier === 'mid'
+          ? 'Hãy xem những từ được đánh dấu bên dưới rồi thử lại khi ôn tập.'
+          : 'Câu này đã được lưu vào Kho ôn tập để bạn luyện lại từng bước.'
+    };
   }
 
   rateItem(rating) {
     if (!this.currentItem) return;
     this.srs.rateLastAttempt(this.currentItem.id, rating);
     this.nextItem();
+  }
+
+  getExampleVietnamese(item) {
+    const example = String(item?.example || '').trim();
+    const bundledTranslation = String(item?.example_vi || '').trim();
+    const wordMeaning = String(item?.vietnamese || '').trim();
+
+    // The legacy word dataset stored only the word meaning in example_vi for
+    // this generated sentence. Build the complete sentence translation locally.
+    const pronunciationTemplate = example.match(
+      /^Practice pronouncing ['\u2018\u2019\"](.+?)['\u2018\u2019\"] clearly in daily conversation\.$/i
+    );
+    if (pronunciationTemplate) {
+      return `Hãy luyện phát âm từ “${pronunciationTemplate[1]}” rõ ràng trong giao tiếp hằng ngày.`;
+    }
+
+    // A translation identical to the headword meaning is not a translation
+    // of the example sentence, so do not present it as one.
+    if (bundledTranslation && bundledTranslation !== wordMeaning) {
+      return bundledTranslation;
+    }
+    return 'Chưa có bản dịch đầy đủ cho câu ví dụ này.';
   }
 
   escapeHTML(value) {
@@ -914,6 +998,12 @@ class DictaLearnApp {
   hideResults() {
     this.isResultsVisible = false;
     this.resultsPanel.classList.remove('visible');
+    this.setResultActionState(false);
+  }
+
+  setResultActionState(showNext) {
+    if (this.btnCheck) this.btnCheck.hidden = showNext;
+    if (this.btnNextAfterResult) this.btnNextAfterResult.classList.toggle('visible', showNext);
   }
 
   nextItem() {
@@ -932,19 +1022,24 @@ class DictaLearnApp {
 
   updateStatsDisplay() {
     const stats = this.srs.getAnalyticsOverview();
+    const reviewSummary = this.srs.getReviewLibrarySummary();
     
     if (this.streakCounterEl) {
       this.streakCounterEl.textContent = `${stats.currentStreak} ngày`;
     }
     if (this.reviewCountBadge) {
-      this.reviewCountBadge.textContent = stats.reviewQueueCount;
+      this.reviewCountBadge.textContent = reviewSummary.learned;
     }
+    if (this.reviewLearnedCount) this.reviewLearnedCount.textContent = reviewSummary.learned;
+    if (this.reviewDueCount) this.reviewDueCount.textContent = reviewSummary.due;
+    if (this.reviewLearningCount) this.reviewLearningCount.textContent = reviewSummary.learning;
+    if (this.reviewMasteredCount) this.reviewMasteredCount.textContent = reviewSummary.mastered;
 
     // Modal stats
     if (this.statTotalPracticed) this.statTotalPracticed.textContent = stats.totalPracticed;
     if (this.statAccuracyRate) this.statAccuracyRate.textContent = `${stats.accuracyRate}%`;
     if (this.statMasteredCount) this.statMasteredCount.textContent = stats.masteredCount;
-    if (this.statReviewCount) this.statReviewCount.textContent = stats.reviewQueueCount;
+    if (this.statReviewCount) this.statReviewCount.textContent = reviewSummary.learned;
     if (this.statStreak) this.statStreak.textContent = `${stats.currentStreak} ngày`;
   }
 
@@ -1020,10 +1115,11 @@ class DictaLearnApp {
       this.applyFilter();
     });
 
-    this.tabReviewBtn?.addEventListener('click', () => {
+    this.tabReviewBtn?.addEventListener('click', async () => {
       this.currentTab = 'review';
       this.setActiveTabPill(this.tabReviewBtn);
       this.updateUIModeViews();
+      await this.loadLearnedLevelsForReview();
       this.applyFilter();
     });
 
@@ -1123,7 +1219,6 @@ class DictaLearnApp {
     setupViEdit(this.btnEditViPermanent, this.inlineViEditFormPermanent, this.customViInputPermanent, this.btnSaveViPermanent, this.btnCancelViPermanent);
     setupViEdit(this.btnEditViSpeaking, this.inlineViEditFormSpeaking, this.customViInputSpeaking, this.btnSaveViSpeaking, this.btnCancelViSpeaking);
     setupViEdit(this.btnEditViInstant, this.inlineViEditFormInstant, this.customViInputInstant, this.btnSaveViInstant, this.btnCancelViInstant);
-    setupViEdit(this.btnEditViResult, this.inlineViEditFormResult, this.customViInputResult, this.btnSaveViResult, this.btnCancelViResult);
 
     // Toggle Vietnamese Meaning Visibility
     this.btnToggleMeaning?.addEventListener('click', () => {
@@ -1285,8 +1380,21 @@ class DictaLearnApp {
     }
   }
 
+  async loadLearnedLevelsForReview() {
+    const levels = new Set(
+      this.srs.getLearnedItemIds()
+        .map(id => String(id).match(/^(A1|A2|B1|B2|C1)_/)?.[1])
+        .filter(Boolean)
+    );
+    await Promise.all([...levels].map(level => this.loadLevelData(level)));
+  }
+
   updateUIModeViews() {
     const isSpeaking = this.currentTab === 'speaking';
+    const isReview = this.currentTab === 'review';
+    if (this.reviewOverview) {
+      this.reviewOverview.classList.toggle('visible', isReview);
+    }
     if (this.speakingPracticeBox) {
       this.speakingPracticeBox.style.display = isSpeaking ? 'block' : 'none';
     }
